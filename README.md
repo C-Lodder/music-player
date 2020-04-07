@@ -6,17 +6,26 @@ The application will parse your iTunes XML library, displays all your playlists/
 
 ## Usage
 
-1. Install dependencies:
+1. Install the application
+
+2. Import your iTunes library via the application settings
+
+## Development
+
+**Install dependencies:**
 ```bash
 npm ci
 ```
 
-2. Run the application:
+**Run the application:**
 ```bash
 npm run start
 ```
 
-3. Import your iTunes library via the application settings
+**Build application:**
+```bash
+npm run start
+```
 
 ## Screenshot
 
