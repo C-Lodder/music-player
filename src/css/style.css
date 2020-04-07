@@ -5,7 +5,10 @@
 	--colour-secondary: hsl(144, 69%, 40%);
 	--colour-tertiary: hsl(0, 0%, 100%);
 	--colour-light-gray: hsla(0, 100%, 0%, 0.05);
+	--colour-gray: hsl(0, 0%, 85%);
 	--colour-text: hsl(0, 0%, 7%);
+	--error-background-colour: hsl(348, 83%, 98%);
+	--error-colour: hsl(349, 84%, 63%);
 }
 
 *, ::before, ::after {
@@ -55,17 +58,27 @@ body {
 	overflow-y: auto;
 	background-color: var(--colour-primary);
 }
-.playlists a {
-	display: block;
+.playlists .actions {
+	justify-content: flex-end;
+}
+.playlists .actions a {
+	display: inline-flex;
+}
+.playlists .playlist-item {
+	display: flex;
 	padding: .5rem 1rem;
-	overflow: hidden;
+	align-items: center;
 	color: var(--colour-tertiary);
 	text-decoration: none;
 	border-bottom: 1px solid var(--colour-secondary);
+}
+.playlists .playlist-item span {
+	display: inline-block;
+	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
-.playlists a svg {
+.playlists .playlist-item svg {
 	margin-inline-end: .5rem;
 }
 
@@ -86,7 +99,7 @@ table {
 table tbody tr:nth-of-type(2n + 1) {
 	background-color: var(--colour-light-gray);
 }
-tr td:first-child {
+tr th:first-child {
 	width: 1rem;
 }
 th {
@@ -147,4 +160,32 @@ td a {
 	100% {
 		transform: rotate(360deg);
 	}
+}
+
+.form-group {
+	padding: 1rem;
+	border-bottom: 1px solid #eeeded;
+}
+.form-help {
+	margin-bottom: .3rem;
+	font-size: .8rem;
+	color: #444;
+}
+label,
+.label {
+	display: block;
+	margin-bottom: .5rem;
+	font-weight: 700;
+}
+
+.error {
+	position: relative;
+	display: none;
+	padding: 1rem 1.5rem;
+	margin-bottom: 1.5rem;
+	color: var(--error-colour);
+	background-color: var(--error-background-colour);
+}
+.error.show {
+	display: block;
 }
