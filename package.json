@@ -7,12 +7,27 @@
   "repository": "https://github.com/C-Lodder/music-player",
   "main": "src/js/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder"
   },
   "dependencies": {
-    "electron": "^8.2.0",
     "electron-store": "^5.1.1",
     "path": "^0.12.7",
     "plist": "^3.0.1"
+  },
+  "devDependencies": {
+    "electron": "^8.2.0",
+    "electron-builder": "^22.4.1"
+  },
+  "build": {
+    "appId": "music-player",
+    "productName": "Music Player",
+    "files": [
+      "**/*",
+      "!package-lock.json",
+      "!README.md",
+      "!.gitignore",
+      "!LICENSE"
+    ]
   }
 }
