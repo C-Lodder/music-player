@@ -84,9 +84,9 @@ async function fetchPlaylists() {
             const span = document.createElement('span')
             playlist.setAttribute('href', '#')
             playlist.classList.add('playlist-item')
-		    playlist.innerHTML = `${icons.playlist}`
-		    span.innerText = `${value.name}`
-		    playlist.append(span)
+            playlist.innerHTML = `${icons.playlist}`
+            span.innerText = `${value.name}`
+            playlist.append(span)
 
             playlist.addEventListener('click', () => {
               empty(list)
@@ -118,8 +118,8 @@ window.addEventListener('DOMContentLoaded', () => {
   audio.addEventListener('ended', (event) => {
     const isPlaying = document.querySelector('.is-playing')
     if (isPlaying !== null && isPlaying.nextElementSibling !== null) {
-	  isPlaying.nextElementSibling.querySelector('.play-button').click()
-	}
+      isPlaying.nextElementSibling.querySelector('.play-button').click()
+    }
   })
 
   settingsTrigger.addEventListener('click', () => {
