@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Music Player</title>
+	<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+	<div class="grid">
+		<div id="playlists" class="playlists">
+			<div class="loader">Loading...</div>
+		</div>
+		<div class="container">
+			<figure class="player">
+				<figcaption id="track-name"></figcaption>
+				<audio id="audio" controls src=""></audio>
+			</figure>
+			<div class="list">
+				<table>
+					<thead>
+						<tr>
+							<th>&nbsp;</th>
+							<th>Name</th>
+							<th>Time</th>
+						</tr>
+					</thead>
+					<tbody id="list"></tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		require(`${__dirname}/js/app.js`)
+	</script>
+</body>
+</html>

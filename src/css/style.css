@@ -1,0 +1,150 @@
+:root {
+	--font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+	--player-height: 90px;
+	--colour-primary: hsl(144, 64%, 47%);
+	--colour-secondary: hsl(144, 69%, 40%);
+	--colour-tertiary: hsl(0, 0%, 100%);
+	--colour-light-gray: hsla(0, 100%, 0%, 0.05);
+	--colour-text: hsl(0, 0%, 7%);
+}
+
+*, ::before, ::after {
+	box-sizing: border-box;
+}
+html {
+	background-color: var(--colour-tertiary);
+	font-family: var(--font-family);
+	font-size: 16px;
+	text-align: start;
+	-webkit-text-size-adjust: 100%;
+	text-rendering: optimizeLegibility;
+	line-height: 1.5;
+	color: var(--colour-text);
+}
+body {
+	margin: 0;
+	height: 100vh;
+	overflow: hidden;
+}
+.grid {
+	display: flex;
+}
+
+.player {
+	position: sticky;
+	top: 0;
+	display: flex;
+	height: var(--player-height);
+	padding: 0 1rem;
+	margin: 0;
+	align-items: center;
+	justify-content: flex-end;
+	background-color: var(--colour-tertiary);
+}
+.player audio {
+	width: 40vw;
+	margin-inline-start: 2rem;
+}
+
+.playlists {
+	position: sticky;
+	top: 0;
+	left: 0;
+	width: 280px;
+	height: 100vh;
+	overflow-y: auto;
+	background-color: var(--colour-primary);
+}
+.playlists a {
+	display: block;
+	padding: .5rem 1rem;
+	overflow: hidden;
+	color: var(--colour-tertiary);
+	text-decoration: none;
+	border-bottom: 1px solid var(--colour-secondary);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.playlists a svg {
+	margin-inline-end: .5rem;
+}
+
+.container {
+	flex: 1;
+}
+.list {
+	overflow-y: auto;
+	height: calc(100vh - var(--player-height));
+}
+
+table {
+	width: 100%;
+	max-width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+table tbody tr:nth-of-type(2n + 1) {
+	background-color: var(--colour-light-gray);
+}
+tr td:first-child {
+	width: 1rem;
+}
+th {
+	font-weight: 700;
+}
+td, th {
+	text-align: inherit;
+	padding: .5rem 1rem;
+	vertical-align: middle;
+}
+td a {
+	display: flex;
+}
+.is-playing {
+	font-weight: 700;
+}
+
+.loader {
+	position: relative;
+	width: 6em;
+	height: 6em;
+	margin: 50px auto;
+	font-size: 10px;
+	text-indent: -9999em;
+	border-radius: 50%;
+	animation: spin 1.4s infinite linear;
+	transform: translateZ(0);
+	background: linear-gradient(to right, var(--colour-tertiary) 10%, rgba(255, 255, 255, 0) 42%);
+}
+.loader::before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%;
+	height: 50%;
+	background: var(--colour-tertiary);
+	border-radius: 100% 0 0 0;
+	content: "";
+}
+.loader::after {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 75%;
+	height: 75%;
+	margin: auto;
+	background: var(--colour-primary);
+	border-radius: 50%;
+	content: "";
+	
+}
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

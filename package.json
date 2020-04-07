@@ -1,0 +1,17 @@
+{
+  "name": "music-player",
+  "version": "0.0.1",
+  "description": "Just another music player",
+  "author": "Charlie Lodder",
+  "license": "MIT",
+  "repository": "https://github.com/C-Lodder/music-player",
+  "main": "src/js/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "electron": "^8.2.0",
+    "path": "^0.12.7",
+    "plist": "^3.0.1"
+  }
+}
