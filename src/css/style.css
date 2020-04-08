@@ -113,7 +113,8 @@ td, th {
 td a {
 	display: flex;
 }
-.is-playing {
+.is-playing,
+.is-paused {
 	font-weight: 700;
 }
 

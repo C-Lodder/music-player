@@ -1,79 +1,27 @@
 const { join } = require('path')
 const Store = require('electron-store')
-const convertTime = require('./utils/convert-time.js')
 const empty = require('./utils/empty.js')
 const icons = require('./utils/icons.js')
-const ItunesLibrary = require(`${__dirname}/itunes.js`)
-const library = new ItunesLibrary
+const error = require('./utils/error.js')
+const row = require('./utils/row.js')
+const ItunesLibrary = require('./itunes.js')
 const Settings = require('./settings.js')
 
 // Elements
 const list = document.getElementById('list')
-const audio = document.getElementById('audio')
-const trackName = document.getElementById('track-name')
 const playlists = document.getElementById('playlists')
-const settingsTrigger = document.getElementById('settings-trigger')
-const settingsModal = document.getElementById('settings-modal')
 
-const error = {
-  show: (msg) => {
-    const errorContainer = document.getElementById('error')
-    errorContainer.innerText = msg
-    errorContainer.classList.add('show')
-  },
-  hide: () => {
-    const errorContainer = document.getElementById('error')
-    errorContainer.classList.remove('show')
-  }
-}
-
-const initPlay = (track, target) => {
-  const isPlaying = document.querySelector('.is-playing')
-  if (isPlaying !== null) {
-    isPlaying.classList.remove('is-playing')
-  }
-
-  target.closest('tr').classList.add('is-playing')
-  audio.setAttribute('src', track.location)
-  trackName.innerText = track.name
-  audio.play()
-}
-
-// Build row for each playlist item
-const buildRow = (track) => {
-  const row = document.createElement('tr')
-  const id = document.createElement('td')
-  const name = document.createElement('td')
-  const time = document.createElement('td')
-  const play = document.createElement('a')
-  play.setAttribute('href', '#')
-  play.setAttribute('data-location', track.location)
-  play.classList.add('play-button')
-  play.innerHTML = icons.play
-  play.addEventListener('click', ({ currentTarget }) => {
-    initPlay(track, currentTarget)
-  })
-  id.append(play)
-
-  name.innerText = track.name
-
-  time.innerText = convertTime(track.total_time)
-
-  row.append(id, name, time)
-
-  return row
-}
 
 // Asynchronously get all playlists from the library
 async function fetchPlaylists() {
   const store = new Store()
-
   if (store.get('library') === undefined) {
     empty(playlists)
     error.show('You must select an iTunes library. This can be done in the application settings.')
     return
   }
 
+  const library = new ItunesLibrary
   library.open(store.get('library'))
     .then(() => {
       library.getPlaylists()
@@ -95,7 +43,17 @@ async function fetchPlaylists() {
                   Object.entries(tracks).forEach(([key, value]) => {
                     library.getTrackByID(value.track_id)
                       .then((track) => {
-                        list.append(buildRow(track))
+                        list.append(row.build(track))
+                      })
+                      .then(() => {
+                        const trackName = document.getElementById('track-name')
+                        if (trackName.getAttribute('data-track-id') !== undefined) {
+                          const trackId = document.querySelector(`[data-id="${trackName.getAttribute('data-track-id')}"]`)
+                          if (trackId) {
+                            trackId.classList.add('is-playing')
+                            trackId.querySelector('.play-button').innerHTML = icons.pause
+                          }
+                        }
                       })
                   })
                 })
@@ -115,14 +73,14 @@ window.addEventListener('DOMContentLoaded', () => {
   fetchPlaylists()
 
   // Play next song
-  audio.addEventListener('ended', (event) => {
+  document.getElementById('audio').addEventListener('ended', (event) => {
     const isPlaying = document.querySelector('.is-playing')
     if (isPlaying !== null && isPlaying.nextElementSibling !== null) {
       isPlaying.nextElementSibling.querySelector('.play-button').click()
     }
   })
 
-  settingsTrigger.addEventListener('click', () => {
-    settingsModal.visible = true
+  document.getElementById('settings-trigger').addEventListener('click', () => {
+    document.getElementById('settings-modal').visible = true
   })
 })
