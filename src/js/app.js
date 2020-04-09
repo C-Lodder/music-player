@@ -38,7 +38,7 @@ async function fetchPlaylists() {
 
             playlist.addEventListener('click', ({ currentTarget }) => {
               // Remove current 'active' class
-              const active = document.querySelector('active')
+              const active = document.querySelector('.active')
               if (active !== null) {
                 active.classList.remove('active')
               }
