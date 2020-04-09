@@ -36,8 +36,19 @@ async function fetchPlaylists() {
             span.innerText = `${value.name}`
             playlist.append(span)
 
-            playlist.addEventListener('click', () => {
+            playlist.addEventListener('click', ({ currentTarget }) => {
+              // Remove current 'active' class
+              const active = document.querySelector('active')
+              if (active !== null) {
+                active.classList.remove('active')
+              }
+
+              // Add 'active' class to clicked item
+              currentTarget.classList.add('active')
+
+              // Empty current playlist tracks
               empty(list)
+
               value.getPlaylistItems(false)
                 .then((tracks) => {
                   Object.entries(tracks).forEach(([key, value]) => {

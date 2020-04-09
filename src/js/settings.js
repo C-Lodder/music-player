@@ -76,9 +76,9 @@ class SettingsModal extends HTMLElement {
           height: 80vh;
           padding: 1rem;
           flex-direction: column;
-          background-color: var(--colour-tertiary);
+          background-color: var(--colour-dark-3);
           transform: translate(-50%, -50%);
-          border-radius: 2px;
+          border-radius: .2rem;
         }
         .modal-content {
           padding-right: 1rem;

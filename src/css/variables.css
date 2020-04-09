@@ -1,0 +1,16 @@
+/* variables */
+
+:root {
+	--font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+	--player-height: 90px;
+	--colour-primary: hsl(144, 64%, 47%);
+	--colour-text: hsl(0, 0%, 56%);
+	--colour-text-lighter: hsl(0, 0%, 70%);
+	--colour-transparent: hsl(0, 0%, 0%, 0);
+	--colour-dark-1: hsl(0, 0%, 5%);
+	--colour-dark-2: hsl(0, 0%, 9%);
+	--colour-dark-3: hsl(0, 0%, 16%);
+	--colour-white: hsl(0, 0%, 100%);
+	--error-background-colour: hsl(348, 83%, 98%);
+	--error-colour: hsl(349, 84%, 63%);
+}

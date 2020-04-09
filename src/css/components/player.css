@@ -1,0 +1,17 @@
+.player {
+	position: sticky;
+	top: 0;
+	display: flex;
+	height: var(--player-height);
+	padding: 0 1rem;
+	margin: 0;
+	align-items: center;
+	justify-content: flex-end;
+	background-color: var(--colour-dark-3);
+
+	audio {
+		width: 40vw;
+		margin-inline-start: 2rem;
+		filter: invert(95%);
+	}
+}

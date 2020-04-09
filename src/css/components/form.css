@@ -1,0 +1,24 @@
+.form-group {
+	padding: 1rem;
+	border-bottom: 1px solid var(--colour-primary);
+}
+
+.form-help {
+	margin-bottom: .3rem;
+	font-size: .8rem;
+	color: var(--colour-text);
+}
+
+label {
+	display: block;
+	margin-bottom: .5rem;
+	font-weight: 700;
+}
+
+button {
+	padding: .5rem 1rem;
+	background-color: var(--colour-primary);
+	border: 1px solid var(--colour-primary);
+	border-radius: 1rem;
+	color: var(--colour-white);
+}

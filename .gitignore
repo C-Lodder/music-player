@@ -10,6 +10,7 @@
 node_modules/
 
 # Builds #
+package/
 dist/
 
 # CSS map files #

@@ -1,0 +1,11 @@
+.error {
+	position: relative;
+	display: none;
+	padding: 1rem 1.5rem;
+	margin-bottom: 1.5rem;
+	color: var(--error-colour);
+	background-color: var(--error-background-colour);
+}
+.error.show {
+	display: block;
+}

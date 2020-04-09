@@ -1,0 +1,47 @@
+.playlists {
+	position: sticky;
+	top: 0;
+	left: 0;
+	width: 280px;
+	height: 100vh;
+	overflow-y: auto;
+	background-color: var(--colour-dark-1);
+
+	.actions {
+		justify-content: flex-end;
+
+		a {
+			display: inline-flex;
+		}
+	}
+
+	.playlist-item {
+		display: flex;
+		padding: .5rem 1rem;
+		align-items: center;
+		color: var(--colour-text);
+		text-decoration: none;
+		border-bottom: 1px solid var(--colour-dark-3);
+		transition: .2s ease-in-out;
+
+		&.active,
+		&.active path,
+		&:hover,
+		&:hover path {
+			color: var(--colour-primary);
+			fill: var(--colour-primary);
+			transition: .2s ease-in-out;
+		}
+
+		span {
+			display: inline-block;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		svg {
+			margin-inline-end: .5rem;
+		}
+	}
+}

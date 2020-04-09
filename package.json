@@ -8,7 +8,8 @@
   "main": "src/js/main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder"
+    "build": "electron-builder",
+    "postcss": "postcss src/css/app.css -o dist/css/app.css"
   },
   "dependencies": {
     "electron-store": "^5.1.1",
@@ -16,18 +17,29 @@
     "plist": "^3.0.1"
   },
   "devDependencies": {
+    "autoprefixer": "^9.7.6",
+    "cssnano": "^4.1.10",
     "electron": "^8.2.0",
-    "electron-builder": "^22.4.1"
+    "electron-builder": "^22.4.1",
+    "postcss": "^7.0.27",
+    "postcss-cli": "^7.1.0",
+    "postcss-discard-comments": "^4.0.2",
+    "postcss-easy-import": "^3.0.0",
+    "postcss-nested": "^4.2.1"
   },
   "build": {
     "appId": "music-player",
     "productName": "Music Player",
+    "directories": {
+      "output": "package"
+    },
     "files": [
       "**/*",
       "!package-lock.json",
       "!README.md",
       "!CHANGELOG.md",
       "!.gitignore",
+      "!postcss.config.js",
       "!LICENSE"
     ]
   }
