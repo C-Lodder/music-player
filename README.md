@@ -17,6 +17,11 @@ The application will parse your iTunes XML library, displays all your playlists/
 npm ci
 ```
 
+**Compile CSS:**
+```bash
+npm run postcss
+```
+
 **Run the application:**
 ```bash
 npm run start
