@@ -27,6 +27,8 @@ npm run start
 npm run start
 ```
 
-## Screenshot
+## Screenshots
 
-![Screenshot](https://i.imgur.com/7eH3ePs.png)
+![Application](https://i.imgur.com/9eMi003.png)
+
+![Settings](https://i.imgur.com/qFN1kMk.png)
