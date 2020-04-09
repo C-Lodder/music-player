@@ -29,7 +29,7 @@ npm run start
 
 **Build application:**
 ```bash
-npm run start
+npm run build
 ```
 
 ## Screenshots
