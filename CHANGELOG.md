@@ -1,5 +1,8 @@
 # Changelog
 
+## WIP
+- Update Electron to 8.2.1
+
 ## 1.0.1
 - App now uses dark theme
 - Add ability to pause from row
