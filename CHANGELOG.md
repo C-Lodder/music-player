@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 1.0.1
 - App now uses dark theme
 - Add ability to pause from row
 - Change build directory
