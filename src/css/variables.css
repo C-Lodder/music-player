@@ -13,8 +13,7 @@
 	--colour-dark-2: hsl(0, 0%, 9%);
 	--colour-dark-3: hsl(0, 0%, 16%);
 	--colour-white: hsl(0, 0%, 100%);
-	--error-background-colour: hsl(348, 83%, 98%);
-	--error-colour: hsl(349, 84%, 63%);
+	--error-background-colour: hsl(352, 100%, 18%);
 	--border-radius-sm: .3rem;
 	--border-radius-lg: 2.5rem;
 }

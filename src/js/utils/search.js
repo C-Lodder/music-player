@@ -29,7 +29,7 @@ const search = {
     const item = document.createElement('div')
     item.href = '#'
     item.classList.add('dropdown-item')
-    item.append(button.play(value))
+    item.append(button.render(value))
     item.append(text)
 
     return item

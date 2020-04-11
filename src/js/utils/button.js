@@ -1,8 +1,9 @@
 // Play/pause button management
 const icons = require('./icons.js')
+const error = require('./error.js')
 
 const button = {
-  play: (track) => {
+  render: (track) => {
     const audio = document.getElementById('audio')
     const play = document.createElement('a')
     play.setAttribute('href', '#')
@@ -23,7 +24,7 @@ const button = {
         row.classList.remove('is-paused')
         row.classList.add('is-playing')
         currentTarget.innerHTML = icons.pause
-        audio.play()
+        button.play(audio, track.name)
       } else {
         // The user has started playing the first or a different track
         const isPaused = document.querySelector('.is-paused')
@@ -48,11 +49,17 @@ const button = {
 
         // Set the audio source and play
         audio.setAttribute('src', track.location)
-        audio.play()
+        button.play(audio, track.name)
       }
     })
 
     return play
+  },
+  play: (audio, name) => {
+    const play = audio.play()
+    play.catch((err) => {
+      error.show(`Track song "${name}" could not be used because the original file cound not be found`)
+    })
   },
 }
 

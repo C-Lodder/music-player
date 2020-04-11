@@ -3,9 +3,10 @@
 	display: none;
 	padding: 1rem 1.5rem;
 	margin-bottom: 1.5rem;
-	color: var(--error-colour);
+	color: var(--colour-white);
 	background-color: var(--error-background-colour);
-}
-.error.show {
-	display: block;
+
+	&.show {
+		display: block;
+	}
 }

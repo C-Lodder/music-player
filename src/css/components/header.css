@@ -5,6 +5,7 @@
 	height: var(--header-height);
 	padding: var(--header-padding);
 	margin: 0;
+	z-index: 2;
 	align-items: center;
 	justify-content: space-between;
 	background-color: var(--colour-dark-3);
