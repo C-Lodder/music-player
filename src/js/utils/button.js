@@ -57,9 +57,13 @@ const button = {
   },
   play: (audio, name) => {
     const play = audio.play()
-    play.catch((err) => {
-      error.show(`Track song "${name}" could not be used because the original file cound not be found`)
-    })
+    play
+      .then(() => {
+        error.hide()
+      })
+      .catch((err) => {
+        error.show(`Track song "${name}" could not be used because the original file cound not be found`)
+      })
   },
 }
 
