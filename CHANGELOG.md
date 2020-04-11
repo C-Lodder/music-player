@@ -3,6 +3,7 @@
 ## WIP
 - Update Electron to 8.2.1
 - Add search bar (beta)
+- Add "Now playing" above player
 - Display error is track can't be found
 
 ## 1.0.1
