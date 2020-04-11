@@ -28,5 +28,5 @@ body {
 }
 .list {
 	overflow-y: auto;
-	height: calc(100vh - var(--player-height));
+	height: calc(100vh - (var(--header-height) + var(--header-padding)));
 }

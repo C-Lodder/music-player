@@ -1,0 +1,12 @@
+.header {
+	position: sticky;
+	top: 0;
+	display: flex;
+	height: var(--header-height);
+	padding: var(--header-padding);
+	margin: 0;
+	align-items: center;
+	justify-content: space-between;
+	background-color: var(--colour-dark-3);
+	box-shadow: 0 2px 8px 0 var(--colour-primary-alpha);
+}

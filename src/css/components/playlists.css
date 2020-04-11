@@ -4,6 +4,7 @@
 	left: 0;
 	width: 280px;
 	height: 100vh;
+	z-index: 2;
 	overflow-y: auto;
 	background-color: var(--colour-dark-1);
 

@@ -12,13 +12,13 @@ const button = {
     play.addEventListener('click', ({ currentTarget }) => {
       const row = currentTarget.closest('tr')
 
-      if (row.classList.contains('is-playing')) {
+      if (row !== null && row.classList.contains('is-playing')) {
         // If the row already contains the "is-playing" class, the user has paused the track
         row.classList.remove('is-playing')
         row.classList.add('is-paused')
         currentTarget.innerHTML = icons.play
         audio.pause()
-      } else if (row.classList.contains('is-paused')) {
+      } else if (row !== null && row.classList.contains('is-paused')) {
         // If the row already contains the "is-paused" class, the user has presumed playing
         row.classList.remove('is-paused')
         row.classList.add('is-playing')
@@ -41,7 +41,9 @@ const button = {
         trackName.setAttribute('data-track-id', track.track_id)
         trackName.innerText = track.name
 
-        row.classList.add('is-playing')
+        if (row !== null) {
+          row.classList.add('is-playing')
+        }
         currentTarget.innerHTML = icons.pause
 
         // Set the audio source and play
