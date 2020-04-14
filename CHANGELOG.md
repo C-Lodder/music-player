@@ -6,6 +6,7 @@
 - Add "Now playing" above player
 - Display error is track can't be found
 - Fix time conversion
+- Exclude some playlists from being rendered
 
 ## 1.0.1
 - App now uses dark theme
