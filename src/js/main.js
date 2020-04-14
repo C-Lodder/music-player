@@ -12,7 +12,7 @@ function createWindow() {
     }
   })
 
-  //Menu.setApplicationMenu(null)
+  Menu.setApplicationMenu(null)
 
   mainWindow.loadFile(join(__dirname, '../index.html'))
 }
