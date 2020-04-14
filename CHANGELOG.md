@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 1.0.2
 - Update Electron to 8.2.2
 - Add search bar (beta)
 - Add "Artist" to lists
