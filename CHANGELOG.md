@@ -6,6 +6,7 @@
 - Add "Now playing" above player
 - Display error is track can't be found
 - Fix time conversion
+- Fix time showing as NaN if undefined
 - Exclude some playlists from being rendered
 
 ## 1.0.1

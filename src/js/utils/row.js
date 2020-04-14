@@ -11,7 +11,7 @@ const row = {
     name.innerText = track.name
 
     const time = document.createElement('td')
-    time.innerText = convertTime(track.total_time)
+    time.innerText = track.total_time !== undefined ? convertTime(track.total_time) : ''
 
     const tr = document.createElement('tr')
     tr.append(id, name, time)
