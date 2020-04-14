@@ -3,7 +3,8 @@
 ## WIP
 - Update Electron to 8.2.2
 - Add search bar (beta)
-- Add "Now playing" above player
+- Add "Artist" to lists
+- Add "Now playing" indicator above player
 - Display error is track can't be found
 - Fix time conversion
 - Fix time showing as NaN if undefined

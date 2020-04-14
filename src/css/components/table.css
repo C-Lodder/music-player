@@ -7,11 +7,16 @@ table {
 table tbody tr:nth-of-type(2n + 1) {
 	background-color: var(--colour-dark-3);
 }
-tr th:first-child {
-	width: 1rem;
-}
 th {
 	font-weight: 700;
+
+	&.heading-actions {
+		width: 60px;
+	}
+
+	&.heading-time {
+		width: 110px;
+	}
 }
 td, th {
 	text-align: inherit;
@@ -21,6 +26,7 @@ td, th {
 td a {
 	display: flex;
 }
+
 .is-playing,
 .is-paused {
 	color: var(--colour-primary);

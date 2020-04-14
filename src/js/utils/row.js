@@ -13,8 +13,11 @@ const row = {
     const time = document.createElement('td')
     time.innerText = track.total_time !== undefined ? convertTime(track.total_time) : ''
 
+    const artist = document.createElement('td')
+    artist.innerText = track.artist !== undefined ? track.artist : ''
+
     const tr = document.createElement('tr')
-    tr.append(id, name, time)
+    tr.append(id, name, time, artist)
     tr.setAttribute('data-id', track.track_id)
 
     return tr
