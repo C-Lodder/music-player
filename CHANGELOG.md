@@ -1,6 +1,7 @@
 # Changelog
 
 ## WIP
+- Add button to shuffle/repeat songs
 - Fix sidebar z-index
 - Fix audio focus outline
 

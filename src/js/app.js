@@ -5,6 +5,7 @@ const icons = require('./utils/icons.js')
 const error = require('./utils/error.js')
 const search = require('./utils/search.js')
 const row = require('./utils/row.js')
+const button = require('./utils/button.js')
 const ItunesLibrary = require('./itunes.js')
 const Settings = require('./settings.js')
 const library = new ItunesLibrary
@@ -96,11 +97,28 @@ async function fetchPlaylists() {
 window.addEventListener('DOMContentLoaded', () => {
   fetchPlaylists()
 
+  document.getElementById('player-actions').append(button.repeat())
+
   // Play next song
   document.getElementById('audio').addEventListener('ended', () => {
+    const state = button.getRepeatState()
     const isPlaying = document.querySelector('.is-playing')
-    if (isPlaying !== null && isPlaying.nextElementSibling !== null) {
-      isPlaying.nextElementSibling.querySelector('.play-button').click()
+
+    if (isPlaying !== null) {
+      if (state === 'all') {
+        if (isPlaying.nextElementSibling !== null) {
+          // Play the next song if one exists
+          isPlaying.nextElementSibling.querySelector('.play-button').click()
+        } else {
+          // Else start from the beginning of the playlist
+          document.querySelector('.play-button').click()
+        }
+      } else if (state === 'shuffle') {
+        // Pick a random song to play
+        const items = document.querySelectorAll('.play-button')
+        const random = items[Math.floor(Math.random() * items.length)];
+        random.click()
+      }
     }
   })
 

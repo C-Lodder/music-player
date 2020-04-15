@@ -16,11 +16,14 @@ label {
 }
 
 button {
+	display: inline-flex;
 	padding: .5rem 1rem;
+	line-height: 1;
+	color: var(--colour-white);
 	background-color: var(--colour-primary);
 	border: 1px solid var(--colour-primary);
 	border-radius: var(--border-radius-lg);
-	color: var(--colour-white);
+	align-items: center;
 }
 
 input:not([type="checkbox"]),

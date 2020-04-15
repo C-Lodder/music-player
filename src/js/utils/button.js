@@ -1,16 +1,33 @@
-// Play/pause button management
+// Buttons
 const icons = require('./icons.js')
 const error = require('./error.js')
 
+const tryPlay = (audio, name) => {
+  const play = audio.play()
+  play
+    .then(() => {
+      error.hide()
+    })
+    .catch((err) => {
+      error.show(`Track song "${name}" could not be used because the original file cound not be found`)
+    })
+}
+
+const repeatState = {
+  all: true,
+  single: false,
+  shuffle: false,
+}
+
 const button = {
-  render: (track) => {
+  play: (track) => {
     const audio = document.getElementById('audio')
-    const play = document.createElement('a')
-    play.setAttribute('href', '#')
-    play.setAttribute('data-location', track.location)
-    play.classList.add('play-button')
-    play.innerHTML = icons.play
-    play.addEventListener('click', ({ currentTarget }) => {
+    const playBtn = document.createElement('a')
+    playBtn.setAttribute('href', '#')
+    playBtn.setAttribute('data-location', track.location)
+    playBtn.classList.add('play-button')
+    playBtn.innerHTML = icons.play
+    playBtn.addEventListener('click', ({ currentTarget }) => {
       const row = currentTarget.closest('tr')
 
       if (row !== null && row.classList.contains('is-playing')) {
@@ -24,7 +41,7 @@ const button = {
         row.classList.remove('is-paused')
         row.classList.add('is-playing')
         currentTarget.innerHTML = icons.pause
-        button.play(audio, track.name)
+        tryPlay(audio, track.name)
       } else {
         // The user has started playing the first or a different track
         const isPaused = document.querySelector('.is-paused')
@@ -49,21 +66,42 @@ const button = {
 
         // Set the audio source and play
         audio.setAttribute('src', track.location)
-        button.play(audio, track.name)
+        tryPlay(audio, track.name)
       }
     })
 
-    return play
+    return playBtn
   },
-  play: (audio, name) => {
-    const play = audio.play()
-    play
-      .then(() => {
-        error.hide()
-      })
-      .catch((err) => {
-        error.show(`Track song "${name}" could not be used because the original file cound not be found`)
-      })
+  repeat: () => {
+    const orderBtn = document.createElement('button')
+    const audio = document.getElementById('audio')
+    orderBtn.setAttribute('type', 'button')
+    orderBtn.innerHTML = icons.repeat
+    orderBtn.addEventListener('click', ({ currentTarget }) => {
+      // Alternate between the button action
+      if (repeatState.all) {
+        repeatState.all = false
+        repeatState.single = true
+        currentTarget.innerHTML = icons.repeatSingle
+        audio.setAttribute('loop', true)
+      } else if (repeatState.single) { 
+        repeatState.single = false
+        repeatState.shuffle = true
+        currentTarget.innerHTML = icons.shuffle
+        audio.removeAttribute('loop')
+      } else { 
+        repeatState.shuffle = false
+        repeatState.all = true
+        currentTarget.innerHTML = icons.repeat
+        audio.removeAttribute('loop')
+      }
+    })
+
+    return orderBtn
+  },
+  getRepeatState: () => {
+    // Return the object key that's "true"
+    return Object.keys(repeatState).filter(key => repeatState[key])[0]
   },
 }
 

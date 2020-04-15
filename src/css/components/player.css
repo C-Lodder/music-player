@@ -19,3 +19,12 @@
 		color: var(--colour-primary);
 	}
 }
+
+.player-actions {
+	display: flex;
+	align-items: center;
+
+	button {
+		margin-inline-start: 1rem;
+	}
+}
