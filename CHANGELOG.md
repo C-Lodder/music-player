@@ -1,5 +1,8 @@
 # Changelog
 
+## WIP
+- Fix sidebar z-index
+
 ## 1.0.2
 - Update Electron to 8.2.2
 - Add search bar (beta)
