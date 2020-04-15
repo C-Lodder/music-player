@@ -2,6 +2,7 @@
 
 ## WIP
 - Fix sidebar z-index
+- Fix audio focus outline
 
 ## 1.0.2
 - Update Electron to 8.2.2

@@ -5,7 +5,7 @@
 		width: 40vw;
 		filter: invert(95%);
 
-		:focus {
+		&:focus {
 			outline: 0;
 		}
 	}
