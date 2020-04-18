@@ -2,6 +2,7 @@
 
 ## WIP
 - Add button to shuffle/repeat songs
+- Add ability to sort tables
 - Fix sidebar z-index
 - Fix audio focus outline
 - All SVGs are now loaded asynchronously

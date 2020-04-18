@@ -4,7 +4,7 @@ const empty = require('./utils/empty.js')
 const icons = require('./utils/icons.js')
 const error = require('./utils/error.js')
 const search = require('./utils/search.js')
-const row = require('./utils/row.js')
+const table = require('./utils/table.js')
 const button = require('./utils/button.js')
 const ItunesLibrary = require('./itunes.js')
 const Settings = require('./settings.js')
@@ -62,7 +62,7 @@ async function fetchPlaylists() {
                 Object.entries(tracks).forEach(([key, value]) => {
                   library.getTrackByID(value.track_id)
                     .then((track) => {
-                      list.append(row.build(track))
+                      list.append(table.buildRow(track))
                     })
                     .then(() => {
                       const trackName = document.getElementById('track-name')
@@ -88,6 +88,9 @@ async function fetchPlaylists() {
     .then((response) => {
       tracks = response
     })
+    .then(() => {
+      table.sort()
+    })
     .catch((err) => {
       empty(playlists)
       error.show('There was an error parsing the iTunes library')
@@ -97,13 +100,15 @@ async function fetchPlaylists() {
 window.addEventListener('DOMContentLoaded', () => {
   fetchPlaylists()
 
+  // Append the "repeat" button
   document.getElementById('player-actions').append(button.repeat())
 
+  // Render SVGs
   document.querySelectorAll('[data-icon]').forEach((element) => {
     element.innerHTML = icons[element.getAttribute('data-icon')]
   })
 
-  // Play next song
+  // Determine which song to play next
   document.getElementById('audio').addEventListener('ended', () => {
     const state = button.getRepeatState()
     const isPlaying = document.querySelector('.is-playing')
@@ -126,10 +131,12 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   })
 
+  // Open settings modal
   document.getElementById('settings-trigger').addEventListener('click', () => {
     document.getElementById('settings-modal').visible = true
   })
 
+  // Search
   document.getElementById('search-input').addEventListener('input', ({ target }) => {
     search.init(target, tracks)
   })
