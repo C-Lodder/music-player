@@ -43,3 +43,24 @@ input:not([type="radio"]) {
 	font-size: inherit;
 	color: var(--color-text);
 }
+
+.input-icon {
+	position: relative;
+	display: inline-flex;
+
+	input {
+		padding-inline-end: 45px;
+	}
+
+	.icon {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		width: 45px;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+

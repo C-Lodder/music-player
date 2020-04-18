@@ -4,6 +4,7 @@
 - Add button to shuffle/repeat songs
 - Fix sidebar z-index
 - Fix audio focus outline
+- All SVGs are now loaded asynchronously
 
 ## 1.0.2
 - Update Electron to 8.2.2

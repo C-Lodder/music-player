@@ -99,6 +99,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('player-actions').append(button.repeat())
 
+  document.querySelectorAll('[data-icon]').forEach((element) => {
+    element.innerHTML = icons[element.getAttribute('data-icon')]
+  })
+
   // Play next song
   document.getElementById('audio').addEventListener('ended', () => {
     const state = button.getRepeatState()
