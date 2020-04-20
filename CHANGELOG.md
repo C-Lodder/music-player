@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 1.0.3
 - Update Electron to 8.2.3
 - Add button to shuffle/repeat songs
 - Add ability to sort tables
