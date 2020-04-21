@@ -33,9 +33,6 @@ async function fetchPlaylists() {
       return library.getPlaylists()
     })
     .then((obj) => {
-      console.log(obj[1])
-      console.log(obj[3])
-      console.log(obj[5])
       empty(playlists)
       Object.entries(obj).forEach(([key, value]) => {
         const shouldExclude = excludes.some(item => value[item]);
