@@ -33,10 +33,14 @@ async function fetchPlaylists() {
       return library.getPlaylists()
     })
     .then((obj) => {
+      console.log(obj[1])
+      console.log(obj[3])
+      console.log(obj[5])
       empty(playlists)
       Object.entries(obj).forEach(([key, value]) => {
         const shouldExclude = excludes.some(item => value[item]);
-        if (!shouldExclude) {
+        const excludeDownloaded = value.name === 'Downloaded' && value.distinguished_kind !== 65
+        if (!shouldExclude && !excludeDownloaded) {
           const playlist = document.createElement('a')
           const span = document.createElement('span')
           playlist.setAttribute('href', '#')
