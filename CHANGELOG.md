@@ -1,5 +1,8 @@
 # Changelog
 
+## WIP
+- Fix position of error box
+
 ## 1.0.3
 - Update Electron to 8.2.3
 - Add button to shuffle/repeat songs

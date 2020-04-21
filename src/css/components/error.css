@@ -1,12 +1,15 @@
 .error {
-	position: relative;
-	display: none;
+	position: sticky;
+	bottom: 0;
 	padding: 1rem 1.5rem;
 	margin-bottom: 1.5rem;
 	color: var(--colour-white);
 	background-color: var(--error-background-colour);
+	transform: translateY(200px);
+	transition: transform .25s ease-in-out;
 
 	&.show {
-		display: block;
+		transform: translateY(0);
+		transition: transform .25s ease-in-out;
 	}
 }
