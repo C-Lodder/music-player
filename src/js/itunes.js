@@ -2,7 +2,6 @@ const { readFile, constants, access } = require('fs')
 
 module.exports = function ItunesLibrary() {
   let data
-  let ready = false
   const instance = this
 
   // Opens an itunes library xml file and reads and reformats the data
@@ -21,7 +20,6 @@ module.exports = function ItunesLibrary() {
         } else {
           try {
             data = JSON.parse(contents)
-            ready = true
             resolve()
           } catch (err) {
             // If any errors thrown, reject the promise
@@ -69,61 +67,49 @@ module.exports = function ItunesLibrary() {
   this.getTracks = function getTracks() {
     const getTrackByIDSync = this.getTrackByIDSync
     return new Promise((resolve, reject) => {
-      if (ready) {
-        try {
-          const output = []
-          Object.keys(data.tracks).forEach((key) => {
-            output.push(getTrackByIDSync(key))
-          })
-          resolve(output)
-        } catch (e) {
-          reject(e)
-        }
-      } else {
-        reject(new Error('No data ready (call open() first)!'))
+      try {
+        const output = []
+        Object.keys(data.tracks).forEach((key) => {
+          output.push(getTrackByIDSync(key))
+        })
+        resolve(output)
+      } catch (e) {
+        reject(e)
       }
     })
   }
 
   this.getTrackByIDSync = function getTrackByIDSync(id) {
     const Track = module.exports.Track
-    if (ready) {
-      if (id !== null) {
-        if (data.tracks[id]) {
-          const tdata = data.tracks[id]
-          return new Track(tdata)
-        } else {
-          throw new Error('No track found for the specified id!')
-        }
+    if (id !== null) {
+      if (data.tracks[id]) {
+        const tdata = data.tracks[id]
+        return new Track(tdata)
       } else {
-        throw new Error('Track ID is null!')
+        throw new Error('No track found for the specified id!')
       }
     } else {
-      throw new Error('No data ready (call open() first)!')
+      throw new Error('Track ID is null!')
     }
   }
 
   this.getTrackByID = function getTrackByID(id) {
     const Track = module.exports.Track
     return new Promise((resolve, reject) => {
-      if (ready) {
-        if (id !== null && id !== undefined) {
-          if (data.tracks[id]) {
-            try {
-              const tdata = data.tracks[id]
-              const t = new Track(tdata)
-              resolve(t)
-            } catch (e) {
-              reject(e)
-            }
-          } else {
-            reject(new Error('No track found for the specified id!'))
+      if (id !== null && id !== undefined) {
+        if (data.tracks[id]) {
+          try {
+            const tdata = data.tracks[id]
+            const t = new Track(tdata)
+            resolve(t)
+          } catch (e) {
+            reject(e)
           }
         } else {
-          reject(new Error('Track ID is null!'))
+          reject(new Error('No track found for the specified id!'))
         }
       } else {
-        reject(new Error('No data ready (call open() first)!'))
+        reject(new Error('Track ID is null!'))
       }
     })
   }
@@ -189,19 +175,15 @@ module.exports = function ItunesLibrary() {
   this.getPlaylists = function getPlaylists() {
     const getPlaylistByIDSync = instance.getPlaylistByIDSync
     return new Promise((resolve, reject) => {
-      if (ready) {
-        try {
-          const playlists = data.playlists
-          const output = []
-          Object.values(playlists).forEach((value) => {
-            output.push(getPlaylistByIDSync(value.playlist_id))
-          })
-          resolve(output)
-        } catch (e) {
-          reject(e)
-        }
-      } else {
-        reject(new Error('No data ready (call open() first)!'))
+      try {
+        const playlists = data.playlists
+        const output = []
+        Object.values(playlists).forEach((value) => {
+          output.push(getPlaylistByIDSync(value.playlist_id))
+        })
+        resolve(output)
+      } catch (e) {
+        reject(e)
       }
     })
   }
@@ -209,110 +191,70 @@ module.exports = function ItunesLibrary() {
   this.getPlaylistByID = function getPlaylistByID(id) {
     const Playlist = module.exports.Playlist
     return new Promise((resolve, reject) => {
-      if (ready) {
-        if (id !== null && id !== undefined) {
-          try {
-            Object.values(data.playlists).forEach((value) => {
-              if (value.playlist_id && value.playlist_id === id) {
-                resolve(new Playlist(value))
-              }
-            })
-          } catch (e) {
-            reject(e)
-          }
-          reject(new Error('No playlist found for the specified id!'))
-        } else {
-          reject(new Error('Playlist ID is null!'))
+      if (id !== null && id !== undefined) {
+        try {
+          Object.values(data.playlists).forEach((value) => {
+            if (value.playlist_id && value.playlist_id === id) {
+              resolve(new Playlist(value))
+            }
+          })
+        } catch (e) {
+          reject(e)
         }
+        reject(new Error('No playlist found for the specified id!'))
       } else {
-        reject(new Error('No data ready (call open() first)!'))
+        reject(new Error('Playlist ID is null!'))
       }
     })
   }
 
   this.getPlaylistByIDSync = function getPlaylistByIDSync(id) {
     const Playlist = module.exports.Playlist
-    if (ready) {
-      if (id !== null && id !== undefined) {
-        const playlists = data.playlists
-        for (const key in playlists) {
-          if (playlists.hasOwnProperty(key)) {
-            const playlist = playlists[key]
-            if (playlist.playlist_id && playlist.playlist_id === id) {
-              return new Playlist(playlist)
-            }
+    if (id !== null && id !== undefined) {
+      const playlists = data.playlists
+      for (const key in playlists) {
+        if (playlists.hasOwnProperty(key)) {
+          const playlist = playlists[key]
+          if (playlist.playlist_id && playlist.playlist_id === id) {
+            return new Playlist(playlist)
           }
         }
-        throw new Error('No playlist found for the specified id!')
-      } else {
-        throw new Error('Playlist ID is null!')
       }
+      throw new Error('No playlist found for the specified id!')
     } else {
-      throw new Error('No data ready (call open() first)!')
+      throw new Error('Playlist ID is null!')
     }
   }
 
   this.getMajorVersion = function getMajorVersion() {
-    if (ready) {
-      return data.major_version
-    } else {
-      throw new Error('No data ready (call open() first)!')
-    }
+    return data.major_version
   }
 
   this.getMinorVersion = function getMinorVersion() {
-    if (ready) {
-      return data.minor_version
-    } else {
-      throw new Error('No data ready (call open() first)!')
-    }
+    return data.minor_version
   }
 
   this.getApplicationVersion = function getApplicationVersion() {
-    if (ready) {
-      return data.application_version
-    } else {
-      throw new Error('No data ready (call open() first)!')
-    }
+    return data.application_version
   }
 
   this.getDate = function getDate() {
-    if (ready) {
-      return data.date
-    } else {
-      throw new Error('No data ready (call open() first)!')
-    }
+    return data.date
   }
 
   this.getFeatures = function getFeatures() {
-    if (ready) {
-      return data.features
-    } else {
-      throw new Error('No data ready (call open() first)!')
-    }
+    return data.features
   }
 
   this.getShowContentRatings = function getShowContentRatings() {
-    if (ready) {
-      return data.show_content_ratings
-    } else {
-      throw new Error('No data ready (call open() first)!')
-    }
+    return data.show_content_ratings
   }
 
   this.getLibraryPersistentID = function getLibraryPersistentID() {
-    if (ready) {
-      return data.library_persistent_id
-    } else {
-      throw new Error('No data ready (call open() first)!')
-    }
+    return data.library_persistent_id
   }
 
   this.getMusicFolder = function getMusicFolder() {
-    if (ready) {
-      return data.music_folder
-    } else {
-      throw new Error('No data ready (call open() first)!')
-    }
+    return data.music_folder
   }
 }
