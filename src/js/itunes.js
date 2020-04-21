@@ -1,5 +1,4 @@
-const fs = require('fs')
-const plist = require('plist')
+const { readFile, constants, access } = require('fs')
 
 module.exports = function ItunesLibrary() {
   let data
@@ -8,22 +7,22 @@ module.exports = function ItunesLibrary() {
 
   // Opens an itunes library xml file and reads and reformats the data
   this.open = function open(filename) {
-    if (!validateFilename(filename)) {
-      throw 'Invalid file path!'
-    }
-    return new Promise((fulfill, reject) => {
-      fs.readFile(filename, (err, dat) => {
+    access(filename, constants.F_OK | constants.R_OK, (err) => {
+      if (err) {
+        throw 'Invalid file path!'
+      }
+    })
+
+    return new Promise((resolve, reject) => {
+      readFile(filename, 'utf8', (err, contents) => {
         if (err) {
           // If there's an error reading the file, reject the promise
           reject(err)
         } else {
           try {
-            let xmlData = dat.toString()
-            xmlData = xmlData.replace(/[\n\t\r]/g, '')
-            data = plist.parse(xmlData)
-            reformat_keys(data)
+            data = JSON.parse(contents)
             ready = true
-            fulfill()
+            resolve()
           } catch (err) {
             // If any errors thrown, reject the promise
             reject(err)
@@ -61,30 +60,22 @@ module.exports = function ItunesLibrary() {
     if (trackData != null && typeof trackData === 'object') {
       // Go through all the valid properties and assign them to our new Track object
       // This makes sure that a returned Track object always has the same properties and doesn't have any extras
-      for (const key in properties) {
-        if (properties.hasOwnProperty(key)) {
-          const prop = properties[key]
-          // Set the current property's value to the new Trap object
-          this[prop] = trackData[prop]
-        }
-      }
+      Object.values(properties).forEach((value) => {
+        this[value] = trackData[value]
+      })
     }
   }
 
   this.getTracks = function getTracks() {
     const getTrackByIDSync = this.getTrackByIDSync
-    return new Promise((fulfill, reject) => {
+    return new Promise((resolve, reject) => {
       if (ready) {
         try {
           const output = []
-          const keys = Object.keys(data.tracks)
-          for (const key in keys) {
-            if (keys.hasOwnProperty(key)) {
-              const currentKey = keys[key]
-              output.push(getTrackByIDSync(currentKey))
-            }
-          }
-          fulfill(output)
+          Object.keys(data.tracks).forEach((key) => {
+            output.push(getTrackByIDSync(key))
+          })
+          resolve(output)
         } catch (e) {
           reject(e)
         }
@@ -114,14 +105,14 @@ module.exports = function ItunesLibrary() {
 
   this.getTrackByID = function getTrackByID(id) {
     const Track = module.exports.Track
-    return new Promise((fulfill, reject) => {
+    return new Promise((resolve, reject) => {
       if (ready) {
         if (id !== null && id !== undefined) {
           if (data.tracks[id]) {
             try {
               const tdata = data.tracks[id]
               const t = new Track(tdata)
-              fulfill(t)
+              resolve(t)
             } catch (e) {
               reject(e)
             }
@@ -162,38 +153,32 @@ module.exports = function ItunesLibrary() {
     if (playlistData != null && typeof playlistData === 'object') {
       // Go through all the valid properties and assign them to our new Track object
       // This makes sure that a returned Track object always has the same properties and doesn't have any extras
-      for (const key in properties) {
-        if (properties.hasOwnProperty(key)) {
-          const prop = properties[key]
-          // Set the current property's value to the new Trap object
-          this[prop] = playlistData[prop]
-
-        }
-      }
+      Object.values(properties).forEach((value) => {
+        this[value] = playlistData[value]
+      })
     }
 
     this.getPlaylistItems = function getPlaylistItems(full_data) {
-      return new Promise((fulfill, reject) => {
+      return new Promise((resolve, reject) => {
         try {
           const output = []
           if (full_data === undefined) {
             full_data = true
           }
           if (thisPlaylist.playlist_items === null || thisPlaylist.playlist_items === undefined) {
-            fulfill([])
+            resolve([])
           }
 
           const playlistItems = thisPlaylist.playlist_items
-          for (const key in playlistItems) {
-            if (playlistItems.hasOwnProperty(key)) {
-              if (full_data) {
-                output.push(getTrackByIDSync(playlistItems[key].track_id))
-              } else {
-                output.push(playlistItems[key])
-              }
+          Object.values(playlistItems).forEach((value) => {
+            if (full_data) {
+              output.push(getTrackByIDSync(value.track_id))
+            } else {
+              output.push(value)
             }
-          }
-          fulfill(output)
+          })
+
+          resolve(output)
         } catch (e) {
           reject(e)
         }
@@ -203,18 +188,15 @@ module.exports = function ItunesLibrary() {
 
   this.getPlaylists = function getPlaylists() {
     const getPlaylistByIDSync = instance.getPlaylistByIDSync
-    return new Promise((fulfill, reject) => {
+    return new Promise((resolve, reject) => {
       if (ready) {
         try {
           const playlists = data.playlists
           const output = []
-          for (const key in playlists) {
-            if (playlists.hasOwnProperty(key)) {
-              const current_id = playlists[key].playlist_id
-              output.push(getPlaylistByIDSync(current_id))
-            }
-          }
-          fulfill(output)
+          Object.values(playlists).forEach((value) => {
+            output.push(getPlaylistByIDSync(value.playlist_id))
+          })
+          resolve(output)
         } catch (e) {
           reject(e)
         }
@@ -226,19 +208,15 @@ module.exports = function ItunesLibrary() {
 
   this.getPlaylistByID = function getPlaylistByID(id) {
     const Playlist = module.exports.Playlist
-    return new Promise((fulfill, reject) => {
+    return new Promise((resolve, reject) => {
       if (ready) {
         if (id !== null && id !== undefined) {
           try {
-            const playlists = data.playlists
-            for (const key in playlists) {
-              if (playlists.hasOwnProperty(key)) {
-                const playlist = playlists[key]
-                if (playlist.playlist_id && playlist.playlist_id === id) {
-                  fulfill(new Playlist(playlist))
-                }
+            Object.values(data.playlists).forEach((value) => {
+              if (value.playlist_id && value.playlist_id === id) {
+                resolve(new Playlist(value))
               }
-            }
+            })
           } catch (e) {
             reject(e)
           }
@@ -336,24 +314,5 @@ module.exports = function ItunesLibrary() {
     } else {
       throw new Error('No data ready (call open() first)!')
     }
-  }
-
-  // Function to make sure we're given a valid file
-  function validateFilename(fname) {
-    // Will fail if filename is null or not a string, file doesn't exist, or file is a directory
-    return (fname !== null && typeof fname === 'string' && fs.existsSync(fname) && !fs.lstatSync(fname).isDirectory())
-  }
-
-  // Function to reformat all the keys from the plist file to not be strings with spaces and stuff in them
-  function reformat_keys(data) {
-    Object.keys(data).forEach(key => {
-      const value = data[key]
-      if (typeof value === 'object') {
-        reformat_keys(value)
-      }
-      delete data[key]
-      const newkey = key.toLowerCase().replace(/\s/g, '_')
-      data[newkey] = value
-    })
   }
 }

@@ -1,7 +1,9 @@
 // Modal web component
+const { ipcRenderer } = require('electron')
 const Store = require('electron-store')
-const { readFileSync } = require('fs')
+const { readFile, writeFile } = require('fs').promises
 const { join } = require('path')
+const plist = require('plist')
 
 class SettingsModal extends HTMLElement {
   get visible() {
@@ -100,8 +102,8 @@ class SettingsModal extends HTMLElement {
           <div class='modal-title'>Settings</div>
           <div class='modal-content'>
             <div class="form-group">
-              <label for="library">Library (requires restart)</label>
-              <div class="form-help">Select your iTunes library XML file.</div>
+              <label for="library">Library</label>
+              <div class="form-help">Select your iTunes library XML file, which will be converted to JSON.</div>
               <input type="file" id="library" style="display:none">
               <button id="choose">Choose</button>
               <span id="file-name">${this.library ?? 'No file selected'}</span>
@@ -116,6 +118,19 @@ class SettingsModal extends HTMLElement {
     this.appendChild(container)
   }
 
+  replaceKeys(data) {
+    Object.keys(data).forEach((key) => {
+      var newKey = key.toLowerCase().replace(/\s+/g, '_')
+      if (data[key] && typeof data[key] === 'object') {
+        this.replaceKeys(data[key])
+      }
+      if (key !== newKey) {
+        data[newKey] = data[key]
+        delete data[key]
+      }
+    })
+  }
+
   attachEventHandlers() {
     this.querySelector('.close').addEventListener('click', () => {
       this.close()
@@ -126,9 +141,29 @@ class SettingsModal extends HTMLElement {
     })
 
     this.querySelector('#library').addEventListener('change', () => {
+      const loader = document.createElement('div')
+      loader.classList.add('loader', 'loader-sm', 'bg-gray')
+      this.querySelector('[for="library"]').append(loader)
+
       const libraryPath = this.querySelector('#library').files[0].path
-      this.querySelector('#file-name').innerText = libraryPath
-      this.store.set('library', libraryPath)
+      const replacedPath = libraryPath.replace(/.xml/g, '.json')
+      this.querySelector('#file-name').innerText = replacedPath
+      this.store.set('library', replacedPath)
+
+      readFile(libraryPath, 'utf8')
+        .then((file) => {
+          let json = plist.parse(file)
+          this.replaceKeys(json)
+
+          return json
+        })
+        .then((json) => {
+          writeFile(replacedPath, JSON.stringify(json))
+            .then(() => {
+              ipcRenderer.send('fetch-playlists')
+              loader.remove()
+            })
+        })
     })
 
     this.querySelector('.modal').addEventListener('click', ({ target }) => {

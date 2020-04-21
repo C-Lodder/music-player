@@ -1,4 +1,5 @@
 const { join } = require('path')
+const { ipcRenderer } = require('electron')
 const Store = require('electron-store')
 const empty = require('./utils/empty.js')
 const icons = require('./utils/icons.js')
@@ -140,4 +141,8 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('search-input').addEventListener('input', ({ target }) => {
     search.init(target, tracks)
   })
+})
+
+ipcRenderer.on('fetch-playlists', () => {
+  fetchPlaylists()
 })

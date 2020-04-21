@@ -1,6 +1,7 @@
 # Changelog
 
 ## WIP
+- Major performance improvements
 - Fix position of error box
 
 ## 1.0.3
