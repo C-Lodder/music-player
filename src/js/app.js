@@ -41,12 +41,15 @@ async function fetchPlaylists() {
           const playlist = document.createElement('a')
           const span = document.createElement('span')
           playlist.setAttribute('href', '#')
+          playlist.setAttribute('data-playlist-id', value.playlist_id)
           playlist.classList.add('playlist-item')
           playlist.innerHTML = `${icons.playlist}`
           span.innerText = `${value.name}`
           playlist.append(span)
 
           playlist.addEventListener('click', ({ currentTarget }) => {
+            store.set('last-playlist', currentTarget.getAttribute('data-playlist-id'))
+
             // Remove current 'active' class
             const active = document.querySelector('.active')
             if (active !== null) {
@@ -89,6 +92,11 @@ async function fetchPlaylists() {
     })
     .then((response) => {
       tracks = response
+    })
+    .then(() => {
+      if (store.get('last-playlist') !== undefined) {
+        document.querySelector(`[data-playlist-id="${store.get('last-playlist')}"]`).click()
+      }
     })
     .then(() => {
       table.sort()

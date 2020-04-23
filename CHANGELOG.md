@@ -3,6 +3,7 @@
 ## WIP
 - Major performance improvements
 - Search box improvements
+- Show last viewed playlist on start
 - Fix position of error box
 
 ## 1.0.3
