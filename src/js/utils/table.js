@@ -17,6 +17,7 @@ const table = {
     artist.innerText = track.artist !== undefined ? track.artist : ''
 
     const tr = document.createElement('tr')
+    tr.classList.add('row')
     tr.append(id, name, time, artist)
     tr.setAttribute('data-id', track.track_id)
 

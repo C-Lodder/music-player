@@ -28,7 +28,7 @@ const button = {
     playBtn.classList.add('play-button')
     playBtn.innerHTML = icons.play
     playBtn.addEventListener('click', ({ currentTarget }) => {
-      const row = currentTarget.closest('tr')
+      const row = currentTarget.closest('.row')
 
       if (row !== null && row.classList.contains('is-playing')) {
         // If the row already contains the "is-playing" class, the user has paused the track

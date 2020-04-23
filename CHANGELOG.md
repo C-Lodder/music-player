@@ -2,6 +2,7 @@
 
 ## WIP
 - Major performance improvements
+- Search box improvements
 - Fix position of error box
 
 ## 1.0.3
