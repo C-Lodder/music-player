@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 1.0.4
 - Major performance improvements
 - Search box improvements
 - Show last viewed playlist on start
