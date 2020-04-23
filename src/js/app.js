@@ -35,7 +35,7 @@ async function fetchPlaylists() {
     .then((obj) => {
       empty(playlists)
       Object.entries(obj).forEach(([key, value]) => {
-        const shouldExclude = excludes.some(item => value[item]);
+        const shouldExclude = excludes.some(item => value[item])
         const excludeDownloaded = value.name === 'Downloaded' && value.distinguished_kind !== 65
         if (!shouldExclude && !excludeDownloaded) {
           const playlist = document.createElement('a')
@@ -127,7 +127,7 @@ window.addEventListener('DOMContentLoaded', () => {
       } else if (state === 'shuffle') {
         // Pick a random song to play
         const items = document.querySelectorAll('.play-button')
-        const random = items[Math.floor(Math.random() * items.length)];
+        const random = items[Math.floor(Math.random() * items.length)]
         random.click()
       }
     }
