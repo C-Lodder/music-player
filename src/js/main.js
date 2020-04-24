@@ -1,8 +1,44 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, Menu, ipcMain } = require('electron')
+const { app, BrowserWindow, Menu, ipcMain, webContents } = require('electron')
 const { join } = require('path')
 
 let mainWindow
+
+const ThumbarButtonsPause = [
+  {
+    tooltip: 'Previous',
+    icon: join(__dirname, '../img/previous.png'),
+    click () { mainWindow.webContents.send('previous') }
+  },
+  {
+    tooltip: 'Pause',
+    icon: join(__dirname, '../img/pause.png'),
+    click () { mainWindow.webContents.send('pause') }
+  },
+  {
+    tooltip: 'Next',
+    icon: join(__dirname, '../img/next.png'),
+    click () { mainWindow.webContents.send('next') }
+  }
+]
+
+const ThumbarButtons = [
+  {
+    tooltip: 'Previous',
+    icon: join(__dirname, '../img/previous.png'),
+    click () { mainWindow.webContents.send('previous') }
+  },
+  {
+    tooltip: 'Play',
+    icon: join(__dirname, '../img/play.png'),
+    click () { mainWindow.webContents.send('play') }
+  },
+  {
+    tooltip: 'Next',
+    icon: join(__dirname, '../img/next.png'),
+    click () { mainWindow.webContents.send('next') }
+  }
+]
 
 function createWindow() {
   // Create the browser window.
@@ -17,6 +53,8 @@ function createWindow() {
   Menu.setApplicationMenu(null)
 
   mainWindow.loadFile(join(__dirname, '../index.html'))
+
+  mainWindow.setThumbarButtons(ThumbarButtons)
 }
 
 // This method will be called when Electron has finished
@@ -39,4 +77,12 @@ app.on('activate', () => {
 
 ipcMain.on('fetch-playlists', (event) => {
   event.reply('fetch-playlists')
+})
+
+ipcMain.on('is-playing', (event, isPlaying) => {
+  if (isPlaying) {
+    mainWindow.setThumbarButtons(ThumbarButtonsPause)
+  } else {
+    mainWindow.setThumbarButtons(ThumbarButtons)
+  }
 })

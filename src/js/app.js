@@ -155,3 +155,65 @@ window.addEventListener('DOMContentLoaded', () => {
 ipcRenderer.on('fetch-playlists', () => {
   fetchPlaylists()
 })
+
+ipcRenderer.on('previous', () => {
+  const isPlaying = document.querySelector('.is-playing')
+  let playing = false
+  if (isPlaying !== null && isPlaying.previousElementSibling !== null) {
+    // Play the next song if one exists
+    isPlaying.previousElementSibling.querySelector('.play-button').click()
+    playing = true
+  }
+
+  const isPaused = document.querySelector('.is-paused')
+  if (isPaused !== null && isPaused.previousElementSibling !== null) {
+    // Play the next song if one exists
+    isPaused.previousElementSibling.querySelector('.play-button').click()
+    playing = true
+  }
+
+  ipcRenderer.send('is-playing', playing)
+})
+
+ipcRenderer.on('play', () => {
+  const isPaused = document.querySelector('.is-paused')
+  let playing = false
+  if (isPaused !== null) {
+    // If a song has been paused, continue playing it
+    isPaused.querySelector('.play-button').click()
+    playing = true
+  } else {
+    // Else play the first song in the list
+    document.querySelector('.play-button').click()
+    playing = true
+  }
+
+  ipcRenderer.send('is-playing', playing)
+})
+
+ipcRenderer.on('pause', () => {
+  const isPlaying = document.querySelector('.is-playing')
+  if (isPlaying !== null) {
+    isPlaying.querySelector('.play-button').click()
+    ipcRenderer.send('is-playing', false)
+  }
+})
+
+ipcRenderer.on('next', () => {
+  const isPlaying = document.querySelector('.is-playing')
+  let playing = false
+  if (isPlaying !== null && isPlaying.nextElementSibling !== null) {
+    // Play the next song if one exists
+    isPlaying.nextElementSibling.querySelector('.play-button').click()
+    playing = true
+  }
+
+  const isPaused = document.querySelector('.is-paused')
+  if (isPaused !== null && isPaused.nextElementSibling !== null) {
+    // Play the next song if one exists
+    isPaused.nextElementSibling.querySelector('.play-button').click()
+    playing = true
+  }
+
+  ipcRenderer.send('is-playing', playing)
+})
