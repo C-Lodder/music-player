@@ -1,5 +1,8 @@
 # Changelog
 
+## WIP
+- Add thumbar buttons (windows only)
+
 ## 1.0.4
 - Major performance improvements
 - Search box improvements
