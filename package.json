@@ -12,20 +12,20 @@
     "postcss": "postcss src/css/app.css -o dist/css/app.css"
   },
   "dependencies": {
-    "electron-store": "^5.1.1",
+    "electron-store": "^6.0.0",
     "path": "^0.12.7",
     "plist": "^3.0.1"
   },
   "devDependencies": {
-    "autoprefixer": "^9.7.6",
+    "autoprefixer": "^9.8.5",
     "cssnano": "^4.1.10",
-    "electron": "^8.2.3",
-    "electron-builder": "^22.4.1",
-    "postcss": "^7.0.27",
-    "postcss-cli": "^7.1.0",
+    "electron": "^9.1.1",
+    "electron-builder": "^22.8.0",
+    "postcss": "^7.0.32",
+    "postcss-cli": "^7.1.1",
     "postcss-discard-comments": "^4.0.2",
     "postcss-easy-import": "^3.0.0",
-    "postcss-nested": "^4.2.1"
+    "postcss-nested": "^4.2.3"
   },
   "build": {
     "appId": "music-player",

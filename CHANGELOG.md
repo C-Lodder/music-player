@@ -2,6 +2,7 @@
 
 ## WIP
 - Add thumbar buttons (windows only)
+- Update electron to 9.1.1
 
 ## 1.0.4
 - Major performance improvements
