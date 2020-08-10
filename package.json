@@ -19,7 +19,7 @@
   "devDependencies": {
     "autoprefixer": "^9.8.6",
     "cssnano": "^4.1.10",
-    "electron": "^9.1.2",
+    "electron": "^9.2.0",
     "electron-builder": "^22.8.0",
     "postcss": "^7.0.32",
     "postcss-cli": "^7.1.1",
