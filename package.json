@@ -22,7 +22,7 @@
     "electron": "^9.2.1",
     "electron-builder": "^22.8.0",
     "postcss": "^7.0.32",
-    "postcss-cli": "^7.1.1",
+    "postcss-cli": "^7.1.2",
     "postcss-discard-comments": "^4.0.2",
     "postcss-easy-import": "^3.0.0",
     "postcss-nested": "^4.2.3"
