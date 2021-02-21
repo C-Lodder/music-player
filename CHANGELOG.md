@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 1.0.5
 - Add thumbar buttons (windows only)
 - Update electron to 11.3.0
 - Use context isolation

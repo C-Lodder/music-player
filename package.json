@@ -1,6 +1,6 @@
 {
   "name": "music-player",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Just another music player",
   "author": "Charlie Lodder",
   "license": "MIT",
@@ -44,6 +44,7 @@
       "!CHANGELOG.md",
       "!.gitignore",
       "!postcss.config.js",
+      "!rollup.config.js",
       "!LICENSE"
     ]
   }

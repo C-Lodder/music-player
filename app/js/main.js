@@ -58,7 +58,7 @@ function createWindow() {
   })
 
   //Menu.setApplicationMenu(null)
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 
   mainWindow.loadFile(join(__dirname, '../index.html'))
 
