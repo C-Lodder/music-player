@@ -1,6 +1,6 @@
 // Convert a time from seconds
 
-module.exports = (secs) => {
+const convertTime = (secs) => {
   const pad = (num, size) => (`000${num}`).slice(size * -1)
   const time = parseFloat(secs / 1000).toFixed(3)
   let hours = pad(Math.floor(time / 60 / 60), 1)
@@ -10,3 +10,5 @@ module.exports = (secs) => {
   minutes = parseInt(hours, 10) > 0 ? pad(minutes, 2) : pad(minutes, 1)
   return `${hours}${minutes}:${pad(seconds, 2)}`
 }
+
+export default convertTime

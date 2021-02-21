@@ -22,6 +22,11 @@
 					<figcaption>Now playing: <span id="track-name"></span></figcaption>
 					<div id="player-actions" class="player-actions">
 						<audio id="audio" controls src=""></audio>
+						<button type="button" id="repeat" data-icon="repeat"></button>
+						<!-- <div class="dropdown"> -->
+							<!-- <button type="button" id="queue" data-icon="queue" title="Queue"></button> -->
+							<!-- <div class="dropdown-menu" id="queue-dropdown"></div> -->
+						<!-- </div> -->
 					</div>
 				</figure>
 				<div class="dropdown">
@@ -51,8 +56,6 @@
 
 	<settings-modal id="settings-modal"></settings-modal>
 
-	<script>
-		require(`${__dirname}/js/app.js`)
-	</script>
+	<script src="js/index.js" type="module"></script>
 </body>
 </html>

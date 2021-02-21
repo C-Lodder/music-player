@@ -2,7 +2,9 @@
 
 ## WIP
 - Add thumbar buttons (windows only)
-- Update electron to 9.1.1
+- Update electron to 11.3.0
+- Use context isolation
+- Dark theme got darker
 
 ## 1.0.4
 - Major performance improvements

@@ -1,7 +1,9 @@
 // Remove element child nodes
 
-module.exports = (list) => {
+const empty = (list) => {
   while (list.firstChild) {
     list.removeChild(list.lastChild)
   }
 }
+
+export default empty

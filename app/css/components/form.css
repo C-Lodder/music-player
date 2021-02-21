@@ -38,7 +38,7 @@ input:not([type="radio"]) {
 	margin: 0;
 	border: 1px solid var(--colour-primary);
 	border-radius: var(--border-radius-lg);
-	background-color: var(--colour-dark-3);
+	background-color: var(--colour-dark-2);
 	font-family: inherit;
 	font-size: inherit;
 	color: var(--color-text);

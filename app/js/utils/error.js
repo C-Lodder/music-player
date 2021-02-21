@@ -12,4 +12,4 @@ const error = {
   }
 }
 
-module.exports = error
+export default error

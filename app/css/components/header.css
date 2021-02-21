@@ -8,6 +8,6 @@
 	z-index: 2;
 	align-items: center;
 	justify-content: space-between;
-	background-color: var(--colour-dark-3);
+	background-color: var(--colour-dark-2);
 	box-shadow: 0 2px 8px 0 var(--colour-primary-alpha);
 }

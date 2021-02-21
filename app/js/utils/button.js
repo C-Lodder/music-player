@@ -1,6 +1,6 @@
 // Buttons
-const icons = require('./icons.js')
-const error = require('./error.js')
+import icons from './icons.js'
+import error from './error.js'
 
 const tryPlay = (audio, name) => {
   const play = audio.play()
@@ -22,12 +22,12 @@ const repeatState = {
 const button = {
   play: (track) => {
     const audio = document.getElementById('audio')
-    const playBtn = document.createElement('a')
-    playBtn.setAttribute('href', '#')
-    playBtn.setAttribute('data-location', track.location)
-    playBtn.classList.add('play-button')
-    playBtn.innerHTML = icons.play
-    playBtn.addEventListener('click', ({ currentTarget }) => {
+    const button = document.createElement('a')
+    button.setAttribute('href', '#')
+    button.setAttribute('data-location', track.location)
+    button.classList.add('play-button')
+    button.innerHTML = icons.play
+    button.addEventListener('click', ({ currentTarget }) => {
       const row = currentTarget.closest('.row')
 
       if (row !== null && row.classList.contains('is-playing')) {
@@ -70,14 +70,12 @@ const button = {
       }
     })
 
-    return playBtn
+    return button
   },
   repeat: () => {
-    const orderBtn = document.createElement('button')
+    const button = document.getElementById('repeat')
     const audio = document.getElementById('audio')
-    orderBtn.setAttribute('type', 'button')
-    orderBtn.innerHTML = icons.repeat
-    orderBtn.addEventListener('click', ({ currentTarget }) => {
+    button.addEventListener('click', ({ currentTarget }) => {
       // Alternate between the button action
       if (repeatState.all) {
         repeatState.all = false
@@ -97,7 +95,17 @@ const button = {
       }
     })
 
-    return orderBtn
+    return button
+  },
+  queue: () => {
+    const button = document.getElementById('queue')
+    button.setAttribute('type', 'button')
+    button.innerHTML = icons.repeat
+    button.addEventListener('click', ({ currentTarget }) => {
+      //currentTarget.nextElementSibling.classList.toggle('show')
+    })
+
+    return button
   },
   getRepeatState: () => {
     // Return the object key that's "true"
@@ -105,4 +113,4 @@ const button = {
   },
 }
 
-module.exports = button
+export default button

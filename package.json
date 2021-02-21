@@ -5,27 +5,31 @@
   "author": "Charlie Lodder",
   "license": "MIT",
   "repository": "https://github.com/C-Lodder/music-player",
-  "main": "src/js/main.js",
+  "main": "app/js/main.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder",
-    "postcss": "postcss src/css/app.css -o dist/css/app.css"
+    "postcss": "postcss app/css/app.css -o dist/css/app.css",
+    "rollup": "rollup --config rollup.config.js"
   },
   "dependencies": {
-    "electron-store": "^6.0.1",
-    "path": "^0.12.7",
+    "electron-store": "^7.0.2",
     "plist": "^3.0.1"
   },
   "devDependencies": {
-    "autoprefixer": "^10.2.3",
+    "@rollup/plugin-commonjs": "^17.1.0",
+    "@rollup/plugin-node-resolve": "^11.2.0",
+    "autoprefixer": "^10.2.4",
     "cssnano": "^4.1.10",
-    "electron": "^9.3.1",
+    "electron": "^11.3.0",
     "electron-builder": "^22.9.1",
     "postcss": "^8.2.6",
     "postcss-cli": "^8.3.1",
     "postcss-discard-comments": "^4.0.2",
     "postcss-easy-import": "^3.0.0",
-    "postcss-nested": "^5.0.3"
+    "postcss-nested": "^5.0.3",
+    "rollup": "^2.39.0",
+    "rollup-plugin-terser": "^7.0.2"
   },
   "build": {
     "appId": "music-player",

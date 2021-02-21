@@ -1,6 +1,6 @@
 // Table methods
-const button = require('./button.js')
-const convertTime = require('./convert-time.js')
+import button from './button.js'
+import convertTime from './convertTime.js'
 
 const table = {
   buildRow: (track) => {
@@ -34,7 +34,7 @@ const table = {
 
     // do the work...
     table.querySelectorAll('th').forEach((th) => {
-      th.addEventListener('click', () => {
+      th.addEventListener('click', function() {
         Array.from(tbody.querySelectorAll('tr'))
           .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
           .forEach((tr) => tbody.appendChild(tr))
@@ -43,4 +43,4 @@ const table = {
   },
 }
 
-module.exports = table
+export default table

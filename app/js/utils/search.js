@@ -1,7 +1,7 @@
 // Search
-const empty = require('./empty.js')
-const button = require('./button.js')
-const icons = require('./icons.js')
+import empty from './empty.js'
+import button from './button.js'
+import icons from './icons.js'
 
 const dropdown = document.getElementById('track-dropdown')
 let input
@@ -54,4 +54,4 @@ const search = {
   },
 }
 
-module.exports = search
+export default search

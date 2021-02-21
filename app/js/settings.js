@@ -1,9 +1,5 @@
 // Modal web component
-const { ipcRenderer } = require('electron')
-const Store = require('electron-store')
-const { readFile, writeFile } = require('fs').promises
-const { join } = require('path')
-const plist = require('plist')
+import plist from './lib/plist.js'
 
 class SettingsModal extends HTMLElement {
   get visible() {
@@ -21,8 +17,7 @@ class SettingsModal extends HTMLElement {
   constructor() {
     super()
 
-    this.store = new Store()
-    this.library = this.store.get('library')
+    this.library = window.api.store.get('library')
     this.render()
   }
 
@@ -78,7 +73,7 @@ class SettingsModal extends HTMLElement {
           height: 80vh;
           padding: 1rem;
           flex-direction: column;
-          background-color: var(--colour-dark-3);
+          background-color: var(--colour-dark-2);
           transform: translate(-50%, -50%);
           border-radius: .2rem;
         }
@@ -140,30 +135,24 @@ class SettingsModal extends HTMLElement {
       this.querySelector('#library').click()
     })
 
-    this.querySelector('#library').addEventListener('change', () => {
-      const loader = document.createElement('div')
+    this.querySelector('#library').addEventListener('change', async() => {
+      const loader = await document.createElement('div')
       loader.classList.add('loader', 'loader-sm', 'bg-gray')
       this.querySelector('[for="library"]').append(loader)
 
-      const libraryPath = this.querySelector('#library').files[0].path
-      const replacedPath = libraryPath.replace(/.xml/g, '.json')
+      const libraryPath = await this.querySelector('#library').files[0].path
+      const replacedPath = await libraryPath.replace(/.xml/g, '.json')
       this.querySelector('#file-name').innerText = replacedPath
-      this.store.set('library', replacedPath)
+      window.api.store.set('library', replacedPath)
 
-      readFile(libraryPath, 'utf8')
-        .then((file) => {
-          let json = plist.parse(file)
-          this.replaceKeys(json)
+      const file = await window.api.fs.readFile(libraryPath, 'utf8')
+      await console.log(file)
+      const json = await plist.parse(file)
+      await this.replaceKeys(json)
 
-          return json
-        })
-        .then((json) => {
-          writeFile(replacedPath, JSON.stringify(json))
-            .then(() => {
-              ipcRenderer.send('fetch-playlists')
-              loader.remove()
-            })
-        })
+      await window.api.fs.writeFile(replacedPath, JSON.stringify(json))
+      window.api.send('fetch-playlists')
+      loader.remove()
     })
 
     this.querySelector('.modal').addEventListener('click', ({ target }) => {
@@ -178,4 +167,4 @@ class SettingsModal extends HTMLElement {
   }
 }
 
-module.exports = window.customElements.define('settings-modal', SettingsModal)
+export default window.customElements.define('settings-modal', SettingsModal)

@@ -9,9 +9,8 @@
 	--colour-text: hsl(0, 0%, 56%);
 	--colour-text-lighter: hsl(0, 0%, 70%);
 	--colour-transparent: hsl(0, 0%, 0%, 0);
-	--colour-dark-1: hsl(0, 0%, 5%);
+	--colour-dark-1: hsl(220, 12%, 5%);
 	--colour-dark-2: hsl(0, 0%, 9%);
-	--colour-dark-3: hsl(0, 0%, 16%);
 	--colour-white: hsl(0, 0%, 100%);
 	--error-background-colour: hsl(352, 100%, 18%);
 	--border-radius-sm: .3rem;
