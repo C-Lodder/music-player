@@ -16,7 +16,7 @@ contextBridge.exposeInMainWorld(
       }
     },
     receive: (channel, func) => {
-      let validReceiveChannels = ['play']
+      let validReceiveChannels = ['play', 'pause', 'previous', 'next']
       if (validReceiveChannels.includes(channel)) {
         // Deliberately strip event as it includes `sender` 
         ipcRenderer.on(channel, (event, ...args) => func(...args))

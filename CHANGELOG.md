@@ -1,5 +1,8 @@
 # Changelog
 
+## WIP
+- Fix thumbar buttons events not being received
+
 ## 1.0.5
 - Add thumbar buttons (windows only)
 - Update electron to 11.3.0
