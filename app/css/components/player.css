@@ -3,7 +3,7 @@
 
 	audio {
 		width: 40vw;
-		filter: invert(95%);
+		filter: sepia(50%) saturate(60%) grayscale(1) contrast(90%) invert(96%);
 
 		&:focus {
 			outline: 0;
