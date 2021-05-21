@@ -23,7 +23,7 @@
     "cssnano": "^5.0.3",
     "electron": "^11.3.0",
     "electron-builder": "^22.11.5",
-    "postcss": "^8.2.15",
+    "postcss": "^8.3.0",
     "postcss-cli": "^8.3.1",
     "postcss-discard-comments": "^5.0.1",
     "postcss-easy-import": "^3.0.0",
