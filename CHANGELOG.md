@@ -1,6 +1,7 @@
 # Changelog
 
 ## WIP
+- Update Electron to 13.1.2
 - Fix thumbar buttons events not being received
 
 ## 1.0.5
