@@ -19,7 +19,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-node-resolve": "^13.0.4",
-    "autoprefixer": "^10.3.3",
+    "autoprefixer": "^10.3.4",
     "cssnano": "^5.0.8",
     "electron": "^13.2.3",
     "electron-builder": "^22.11.7",
