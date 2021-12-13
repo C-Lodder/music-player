@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.1",
-    "@rollup/plugin-node-resolve": "^13.0.6",
+    "@rollup/plugin-node-resolve": "^13.1.1",
     "autoprefixer": "^10.4.0",
     "cssnano": "^5.0.12",
     "electron": "^15.3.1",
