@@ -146,7 +146,6 @@ class SettingsModal extends HTMLElement {
       window.api.store.set('library', replacedPath)
 
       const file = await window.api.fs.readFile(libraryPath, 'utf8')
-      await console.log(file)
       const json = await plist.parse(file)
       await this.replaceKeys(json)
 

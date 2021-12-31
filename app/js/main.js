@@ -44,15 +44,11 @@ const ThumbarButtons = [
 ]
 
 function createWindow() {
-  // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1300,
     height: 800,
     webPreferences: {
       nodeIntegration: false,
-      contextIsolation: true,
-      enableRemoteModule: false,
-      worldSafeExecuteJavaScript: true,
       preload: join(__dirname, 'preload.js'),
     }
   })
@@ -71,7 +67,7 @@ function createWindow() {
 app.whenReady().then(() => {
   createWindow()
   
-  app.on('activate', function () {
+  app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) {
