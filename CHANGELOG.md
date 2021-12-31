@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 1.0.7
 - Update Electron to 16.0.5
 
 ## 1.0.6
