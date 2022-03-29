@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "electron-store": "^8.0.1",
-    "plist": "^3.0.4"
+    "plist": "^3.0.5"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.2",
