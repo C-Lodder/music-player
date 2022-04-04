@@ -2,7 +2,7 @@
 
 This is an alternative to iTunes.
 
-The application will parse your iTunes XML library, displays all your playlists/songs, and allow you to play them.
+The application will parse your iTunes XML library, displays all your playlists/songs, and allows you to play them.
 
 ## Usage
 
