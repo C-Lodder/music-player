@@ -22,7 +22,7 @@
     "autoprefixer": "^10.4.4",
     "cssnano": "^5.1.7",
     "electron": "^18.0.3",
-    "electron-builder": "^22.14.13",
+    "electron-builder": "^23.0.3",
     "postcss": "^8.4.12",
     "postcss-cli": "^9.1.0",
     "postcss-discard-comments": "^5.1.0",
