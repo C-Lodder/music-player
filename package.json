@@ -13,7 +13,7 @@
     "rollup": "rollup --config rollup.config.js"
   },
   "dependencies": {
-    "electron-store": "^8.0.1",
+    "electron-store": "^8.0.2",
     "plist": "^3.0.5"
   },
   "devDependencies": {
