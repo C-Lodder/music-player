@@ -49,7 +49,7 @@ async function fetchPlaylists() {
         playlist.append(span)
 
         playlist.addEventListener('click', async({ currentTarget }) => {
-          window.api.invoke('store-set', 'last-playlist', currentTarget.getAttribute('data-playlist-id'))
+          window.api.send('store-set', 'last-playlist', currentTarget.getAttribute('data-playlist-id'))
 
           // Remove current 'active' class
           const active = document.querySelector('.active')

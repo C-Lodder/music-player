@@ -148,7 +148,7 @@ class SettingsModal extends HTMLElement {
       const libraryPath = await this.querySelector('#library').files[0].path
       const replacedPath = await libraryPath.replace(/.xml/g, '.json')
       this.querySelector('#file-name').innerText = replacedPath
-      window.api.invoke('store-set', 'library', replacedPath)
+      window.api.send('store-set', 'library', replacedPath)
 
       const file = await window.api.invoke('fs-read', libraryPath, 'utf8')
       const json = await plist.parse(file)
