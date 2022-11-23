@@ -17,7 +17,6 @@ class SettingsModal extends HTMLElement {
   constructor() {
     super()
 
-    this.library = window.api.store.get('library')
     this.render()
   }
 
@@ -37,6 +36,11 @@ class SettingsModal extends HTMLElement {
         this.querySelector('.modal').classList.add('visible')
       }
     }
+  }
+
+  async getLibrary() {
+    const library = await window.api.invoke('store-get', 'library')
+    this.querySelector('#file-name').innerText = library ?? 'No file selected'
   }
 
   render() {
@@ -101,7 +105,7 @@ class SettingsModal extends HTMLElement {
               <div class="form-help">Select your iTunes library XML file, which will be converted to JSON.</div>
               <input type="file" id="library" style="display:none">
               <button id="choose">Choose</button>
-              <span id="file-name">${this.library ?? 'No file selected'}</span>
+              <span id="file-name">}</span>
             </div>
           </div>
           <div class='modal-footer'>
@@ -111,6 +115,7 @@ class SettingsModal extends HTMLElement {
       </div>`
 
     this.appendChild(container)
+    this.getLibrary()
   }
 
   replaceKeys(data) {
@@ -143,13 +148,13 @@ class SettingsModal extends HTMLElement {
       const libraryPath = await this.querySelector('#library').files[0].path
       const replacedPath = await libraryPath.replace(/.xml/g, '.json')
       this.querySelector('#file-name').innerText = replacedPath
-      window.api.store.set('library', replacedPath)
+      window.api.invoke('store-set', 'library', replacedPath)
 
-      const file = await window.api.fs.readFile(libraryPath, 'utf8')
+      const file = await window.api.invoke('fs-read', libraryPath, 'utf8')
       const json = await plist.parse(file)
       await this.replaceKeys(json)
 
-      await window.api.fs.writeFile(replacedPath, JSON.stringify(json))
+      await window.api.invoke('fs-write', replacedPath, JSON.stringify(json))
       window.api.send('fetch-playlists')
       loader.remove()
     })

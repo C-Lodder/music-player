@@ -12,12 +12,13 @@ const excludes = ['movies', 'books', 'audiobooks', 'tv_shows']
 let tracks
 
 // Elements
+const audio = document.getElementById('audio')
 const list = document.getElementById('list')
 const playlistsElement = document.getElementById('playlists')
 
 // Asynchronously get all playlists from the library
 async function fetchPlaylists() {
-  const libPath = await window.api.store.get('library')
+  const libPath = await window.api.invoke('store-get', 'library')
   if (libPath === undefined) {
     empty(playlistsElement)
     error.show('You must select an iTunes library. This can be done in the application settings.')
@@ -48,7 +49,7 @@ async function fetchPlaylists() {
         playlist.append(span)
 
         playlist.addEventListener('click', async({ currentTarget }) => {
-          window.api.store.set('last-playlist', currentTarget.getAttribute('data-playlist-id'))
+          window.api.invoke('store-set', 'last-playlist', currentTarget.getAttribute('data-playlist-id'))
 
           // Remove current 'active' class
           const active = document.querySelector('.active')
@@ -89,7 +90,7 @@ async function fetchPlaylists() {
     tracks = await library.getTracks()
 
     // Click on the last playlist that was viewed
-    const lastPlaylist = window.api.store.get('last-playlist')
+    const lastPlaylist = await window.api.invoke('store-get', 'last-playlist')
     if (lastPlaylist !== undefined) {
       document.querySelector(`[data-playlist-id="${lastPlaylist}"]`).click()
     }
@@ -116,7 +117,7 @@ document.querySelectorAll('[data-icon]').forEach((element) => {
 })
 
 // Determine which song to play next
-document.getElementById('audio').addEventListener('ended', () => {
+audio.addEventListener('ended', () => {
   const state = button.getRepeatState()
   const isPlaying = document.querySelector('.is-playing')
 

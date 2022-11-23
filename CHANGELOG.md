@@ -1,7 +1,10 @@
 # Changelog
 
+## WIP
+- Update Electron to 21.3.0
+
 ## 1.0.7
-- Update Electron to 16.0.5
+- Update Electron to 16.0.7
 
 ## 1.0.6
 - Update Electron to 13.1.2

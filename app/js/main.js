@@ -1,10 +1,10 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, Menu, ipcMain, webContents } = require('electron')
 const { join } = require('path')
+const { promises, constants } = require('fs')
 const Store = require('electron-store')
 
-Store.initRenderer()
-
+const store = new Store()
 let mainWindow
 
 const ThumbarButtonsPause = [
@@ -48,13 +48,12 @@ function createWindow() {
     width: 1300,
     height: 800,
     webPreferences: {
-      nodeIntegration: false,
       preload: join(__dirname, 'preload.js'),
     }
   })
 
   //Menu.setApplicationMenu(null)
-  //mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools({ mode: 'right' });
 
   mainWindow.loadFile(join(__dirname, '../index.html'))
 
@@ -83,6 +82,26 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
   }
+})
+
+ipcMain.handle('fs-read', async (event, file) => {
+  return await promises.readFile(file, 'utf8')
+})
+
+ipcMain.handle('fs-write', async (event, ...args) => {
+  return await promises.writeFile(...args)
+})
+
+ipcMain.handle('fs-access', async (event, file) => {
+  return await promises.access(file, constants.F_OK)
+})
+
+ipcMain.handle('store-get', async (event, value) => {
+  return await store.get(value)
+})
+
+ipcMain.on('store-set', (event, ...args) => {
+  store.set(...args)
 })
 
 ipcMain.on('fetch-playlists', (event) => {

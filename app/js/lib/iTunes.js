@@ -10,13 +10,13 @@ class iTunes {
     let contents
 
     try {
-      await window.api.fs.access(filename)
+      await window.api.invoke('fs-access', filename)
     } catch(error) {
       throw 'Invalid file path!'
     }
 
     try {
-      contents = await window.api.fs.readFile(filename)
+      contents = await window.api.invoke('fs-read', filename)
       this.data = JSON.parse(contents)
     } catch(error) {
       throw err
