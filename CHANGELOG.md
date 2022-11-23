@@ -2,6 +2,7 @@
 
 ## WIP
 - Update Electron to 21.3.0
+- Volume is now saved when changed
 
 ## 1.0.7
 - Update Electron to 16.0.7

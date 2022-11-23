@@ -52,7 +52,7 @@ function createWindow() {
     }
   })
 
-  //Menu.setApplicationMenu(null)
+  // Menu.setApplicationMenu(null)
   mainWindow.webContents.openDevTools({ mode: 'right' });
 
   mainWindow.loadFile(join(__dirname, '../index.html'))

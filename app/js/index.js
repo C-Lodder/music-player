@@ -139,6 +139,18 @@ audio.addEventListener('ended', () => {
   }
 })
 
+// Set the audio volume from the settings value
+// If it hasn't yet been saved, just set to 1 (max)
+window.api.invoke('store-get', 'volume')
+  .then((volume) => {
+    audio.volume = volume ?? 1
+  })
+
+// Save the volume level when changed
+audio.addEventListener('volumechange', ({ target }) => {
+  window.api.send('store-set', 'volume', `${target.volume}`)
+}, false)
+
 // Open settings modal
 document.getElementById('settings-trigger').addEventListener('click', () => {
   document.getElementById('settings-modal').visible = true

@@ -3,10 +3,10 @@ const { contextBridge, ipcRenderer } = require('electron')
 
 contextBridge.exposeInMainWorld(
   'api', {
-    send: (channel, data) => {
+    send: (channel, ...data) => {
       const validSendChannels = ['is-playing', 'fetch-playlists', 'store-set']
       if (validSendChannels.includes(channel)) {
-        ipcRenderer.send(channel, data)
+        ipcRenderer.send(channel, ...data)
       }
     },
     invoke: (channel, ...data) => {
