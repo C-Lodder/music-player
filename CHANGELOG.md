@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 1.0.8
 - Update Electron to 21.3.0
 - Volume is now saved when changed
 
