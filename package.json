@@ -34,8 +34,23 @@
   "build": {
     "appId": "music-player",
     "productName": "Music Player",
-    "directories": {
-      "output": "package"
+    "artifactName": "${productName}_${version}.${ext}",
+    "publish": [
+      {
+        "provider": "generic"
+      }
+    ],
+    "mac": {
+      "target": {
+        "target": "default",
+        "arch": [
+          "arm64",
+          "x64"
+        ]
+      },
+      "artifactName": "${productName}_${arch}_${version}.${ext}",
+      "category": "macOS.application",
+      "hardenedRuntime": true
     },
     "files": [
       "**/*",
@@ -46,6 +61,39 @@
       "!postcss.config.js",
       "!rollup.config.js",
       "!LICENSE"
-    ]
+    ],
+    "dmg": {
+      "artifactName": "${productName}_${arch}_${version}.${ext}",
+      "window": {
+        "x": 200,
+        "y": 100,
+        "width": 440,
+        "height": 220
+      },
+      "contents": [
+        {
+          "x": 130,
+          "y": 120
+        },
+        {
+          "x": 360,
+          "y": 120,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "artifactName": "${productName}_${version}.${ext}",
+      "target": [
+        "deb",
+        "rpm",
+        "appImage"
+      ],
+      "category": "Audio"
+    }
   }
 }
