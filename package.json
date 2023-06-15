@@ -3,6 +3,10 @@
   "version": "1.0.8",
   "description": "Just another music player",
   "author": "Charlie Lodder",
+  "author": {
+    "name": "Charlie Lodder",
+    "email": "admin@joomjunk.co.uk"
+  },
   "license": "MIT",
   "repository": "https://github.com/C-Lodder/music-player",
   "main": "app/js/main.js",
@@ -11,9 +15,9 @@
     "build": "electron-builder",
     "postcss": "postcss app/css/app.css -o dist/css/app.css",
     "rollup": "rollup --config rollup.config.js",
-    "build:macos": "electron-builder -m",
-    "build:win": "electron-builder -w",
-    "build:linux": "electron-builder -l"
+    "build:macos": "electron-builder -m --publish=never",
+    "build:win": "electron-builder -w --publish=never",
+    "build:linux": "electron-builder -l --publish=never"
   },
   "dependencies": {
     "electron-store": "^8.1.0",
