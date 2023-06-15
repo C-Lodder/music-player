@@ -1,0 +1,24 @@
+name: Build
+
+on: [push, pull_request]
+
+env:
+  CI: true
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        node: [18]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm i
+      - run: npm run rollup
+      - run: npm run postcss
+      - run: npm run build:all
