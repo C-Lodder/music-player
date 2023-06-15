@@ -10,7 +10,8 @@
     "start": "electron .",
     "build": "electron-builder",
     "postcss": "postcss app/css/app.css -o dist/css/app.css",
-    "rollup": "rollup --config rollup.config.js"
+    "rollup": "rollup --config rollup.config.js",
+    "build:all": "electron-builder -lwm"
   },
   "dependencies": {
     "electron-store": "^8.1.0",
