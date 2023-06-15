@@ -19,7 +19,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
+
       - run: npm i
+
+      - name: Installing maxOS related dependencies
+        if: startsWith(matrix.os, 'macos')
+        run: npm i dmg-license
+
       - run: npm run rollup
       - run: npm run postcss
       - run: npm run build:all
