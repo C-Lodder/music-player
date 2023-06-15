@@ -21,11 +21,18 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - run: npm i
-
-      - name: Installing maxOS related dependencies
-        if: startsWith(matrix.os, 'macos')
-        run: npm i dmg-license
-
       - run: npm run rollup
       - run: npm run postcss
-      - run: npm run build:all
+
+      - name: Build MacOS
+        if: startsWith(matrix.os, 'macos')
+        run: npm i dmg-license
+        run: npm run build:macos
+
+      - name: Build Windows
+        if: startsWith(matrix.os, 'windows')
+        run: npm run build:win
+
+      - name: Build Linux
+        if: startsWith(matrix.os, 'ubuntu')
+        run: npm run build:linux
