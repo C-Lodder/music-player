@@ -11,8 +11,8 @@
     "build": "electron-builder",
     "postcss": "postcss app/css/app.css -o dist/css/app.css",
     "rollup": "rollup --config rollup.config.js",
-    "build:macos": "electron-builder -m"
-    "build:win": "electron-builder -m"
+    "build:macos": "electron-builder -m",
+    "build:win": "electron-builder -m",
     "build:linux": "electron-builder -m"
   },
   "dependencies": {
