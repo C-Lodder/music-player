@@ -38,7 +38,7 @@
     "artifactName": "${productName}_${version}.${ext}",
     "publish": [
       {
-        "provider": "generic"
+        "provider": "github"
       }
     ],
     "mac": {
