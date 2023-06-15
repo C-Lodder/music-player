@@ -26,8 +26,7 @@ jobs:
 
       - name: Build MacOS
         if: startsWith(matrix.os, 'macos')
-        run: npm i dmg-license
-        run: npm run build:macos
+        run: npm i dmg-license && npm run build:macos
 
       - name: Build Windows
         if: startsWith(matrix.os, 'windows')
