@@ -30,7 +30,7 @@
     "cssnano": "^6.0.1",
     "electron": "^25.3.0",
     "electron-builder": "^24.4.0",
-    "postcss": "^8.4.26",
+    "postcss": "^8.4.27",
     "postcss-cli": "^10.1.0",
     "postcss-discard-comments": "^6.0.0",
     "postcss-easy-import": "^4.0.0",
