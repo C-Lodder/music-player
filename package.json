@@ -20,7 +20,7 @@
     "build:linux": "electron-builder -l --publish=never"
   },
   "dependencies": {
-    "electron-store": "^8.1.0",
+    "electron-store": "^8.2.0",
     "plist": "^3.1.0"
   },
   "devDependencies": {
