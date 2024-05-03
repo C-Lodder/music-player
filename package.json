@@ -27,7 +27,7 @@
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "autoprefixer": "^10.4.19",
-    "cssnano": "^6.1.2",
+    "cssnano": "^7.0.1",
     "electron": "^30.0.1",
     "electron-builder": "^24.13.3",
     "postcss": "^8.4.38",
