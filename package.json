@@ -32,7 +32,7 @@
     "electron-builder": "^24.13.3",
     "postcss": "^8.4.38",
     "postcss-cli": "^11.0.0",
-    "postcss-discard-comments": "^7.0.0",
+    "postcss-discard-comments": "^7.0.1",
     "postcss-easy-import": "^4.0.0",
     "postcss-nested": "^6.0.1",
     "rollup": "^2.79.1",
