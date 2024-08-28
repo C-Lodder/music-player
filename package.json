@@ -28,7 +28,7 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "autoprefixer": "^10.4.20",
     "cssnano": "^7.0.5",
-    "electron": "^31.4.0",
+    "electron": "^32.0.1",
     "electron-builder": "^24.13.3",
     "postcss": "^8.4.41",
     "postcss-cli": "^11.0.0",
