@@ -1,11 +1,11 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, Menu, ipcMain, webContents } = require('electron')
-const { join } = require('path')
-const { promises, constants } = require('fs')
+const { app, BrowserWindow, Menu, ipcMain } = require('electron')
+const { join } = require('node:path')
+const { promises, constants } = require('node:fs')
 const Store = require('electron-store')
 
 const store = new Store()
-let mainWindow
+let mainWindow = null
 
 const ThumbarButtonsPause = [
   {
@@ -53,7 +53,7 @@ function createWindow() {
   })
 
   // Menu.setApplicationMenu(null)
-  // mainWindow.webContents.openDevTools({ mode: 'right' });
+  mainWindow.webContents.openDevTools({ mode: 'right' });
 
   mainWindow.loadFile(join(__dirname, '../index.html'))
 
@@ -84,23 +84,23 @@ app.on('window-all-closed', () => {
   }
 })
 
-ipcMain.handle('fs-read', async (event, file) => {
+ipcMain.handle('fs-read', async (_, file) => {
   return await promises.readFile(file, 'utf8')
 })
 
-ipcMain.handle('fs-write', async (event, ...args) => {
+ipcMain.handle('fs-write', async (_, ...args) => {
   return await promises.writeFile(...args)
 })
 
-ipcMain.handle('fs-access', async (event, file) => {
+ipcMain.handle('fs-access', async (_, file) => {
   return await promises.access(file, constants.F_OK)
 })
 
-ipcMain.handle('store-get', async (event, value) => {
+ipcMain.handle('store-get', async (_, value) => {
   return await store.get(value)
 })
 
-ipcMain.on('store-set', (event, ...args) => {
+ipcMain.on('store-set', (_, ...args) => {
   store.set(...args)
 })
 
@@ -108,7 +108,7 @@ ipcMain.on('fetch-playlists', (event) => {
   event.reply('fetch-playlists')
 })
 
-ipcMain.on('is-playing', (event, isPlaying) => {
+ipcMain.on('is-playing', (_, isPlaying) => {
   if (isPlaying) {
     mainWindow.setThumbarButtons(ThumbarButtonsPause)
   } else {

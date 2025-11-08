@@ -4,27 +4,3 @@ updates:
   directory: "/"
   schedule:
     interval: weekly
-  open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: electron
-    versions:
-    - ">= 11.1.a, < 11.2"
-  - dependency-name: postcss
-    versions:
-    - 8.2.11
-  - dependency-name: electron
-    versions:
-    - 11.2.1
-    - 12.0.0
-    - 12.0.1
-    - 12.0.2
-    - 12.0.3
-    - 12.0.4
-  - dependency-name: electron-store
-    versions:
-    - 7.0.0
-    - 7.0.1
-    - 7.0.2
-  - dependency-name: autoprefixer
-    versions:
-    - 10.2.4

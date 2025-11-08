@@ -1,5 +1,5 @@
 // Modal web component
-import plist from './lib/plist.js'
+import { parse } from './lib/vendor/plist.js'
 
 class SettingsModal extends HTMLElement {
   get visible() {
@@ -141,7 +141,7 @@ class SettingsModal extends HTMLElement {
     })
 
     this.querySelector('#library').addEventListener('change', async() => {
-      const loader = await document.createElement('div')
+      const loader = document.createElement('div')
       loader.classList.add('loader', 'loader-sm', 'bg-gray')
       this.querySelector('[for="library"]').append(loader)
 
@@ -151,8 +151,8 @@ class SettingsModal extends HTMLElement {
       window.api.send('store-set', 'library', replacedPath)
 
       const file = await window.api.invoke('fs-read', libraryPath, 'utf8')
-      const json = await plist.parse(file)
-      await this.replaceKeys(json)
+      const json = await parse(file)
+      this.replaceKeys(json)
 
       await window.api.invoke('fs-write', replacedPath, JSON.stringify(json))
       window.api.send('fetch-playlists')

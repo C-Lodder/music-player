@@ -3,40 +3,25 @@
   "version": "1.0.8",
   "description": "Just another music player",
   "author": "Charlie Lodder",
-  "author": {
-    "name": "Charlie Lodder",
-    "email": "admin@joomjunk.co.uk"
-  },
   "license": "MIT",
   "repository": "https://github.com/C-Lodder/music-player",
   "main": "app/js/main.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder",
-    "postcss": "postcss app/css/app.css -o dist/css/app.css",
-    "rollup": "rollup --config rollup.config.js",
     "build:macos": "electron-builder -m --publish=never",
     "build:win": "electron-builder -w --publish=never",
     "build:linux": "electron-builder -l --publish=never"
   },
   "dependencies": {
     "electron-store": "^8.2.0",
-    "plist": "^3.1.0"
+    "@plist/parse": "^1.1.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^28.0.8",
-    "@rollup/plugin-node-resolve": "^16.0.3",
-    "autoprefixer": "^10.4.21",
-    "cssnano": "^7.1.1",
-    "electron": "^38.3.0",
+    "electron": "^38.6.0",
     "electron-builder": "^26.0.12",
-    "postcss": "^8.5.6",
-    "postcss-cli": "^11.0.1",
-    "postcss-discard-comments": "^7.0.0",
-    "postcss-easy-import": "^4.0.0",
-    "postcss-nested": "^7.0.2",
-    "rollup": "^2.79.2",
-    "rollup-plugin-terser": "^7.0.2"
+    "esbuild": "^0.25.12",
+    "lightningcss": "^1.30.2"
   },
   "build": {
     "appId": "music-player",
@@ -65,8 +50,7 @@
       "!README.md",
       "!CHANGELOG.md",
       "!.gitignore",
-      "!postcss.config.js",
-      "!rollup.config.js",
+      "!setup.js",
       "!LICENSE"
     ],
     "dmg": {

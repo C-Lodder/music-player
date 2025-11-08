@@ -33,7 +33,7 @@ async function fetchPlaylists() {
 
   try {
     const playlists = await library.getPlaylists()
-    await empty(playlistsElement)
+    empty(playlistsElement)
 
     Object.entries(playlists).forEach(([key, value]) => {
       const shouldExclude = excludes.some(item => value[item])
@@ -61,7 +61,7 @@ async function fetchPlaylists() {
           currentTarget.classList.add('active')
 
           // Empty current playlist tracks
-          await empty(list)
+          empty(list)
 
           // Get the playlist tracks
           const playlistItems = await library.getPlaylistItems(value)
@@ -69,7 +69,7 @@ async function fetchPlaylists() {
           // Append each playlist track to the table
           Object.entries(playlistItems).forEach(async([key, value]) => {
             const track = await library.getTrackById(value.track_id)
-            await list.append(table.buildRow(track))
+            list.append(table.buildRow(track))
 
             const trackName = document.getElementById('track-name')
             if (trackName.getAttribute('data-track-id') !== undefined) {
@@ -114,6 +114,14 @@ button.repeat()
 // Render SVGs
 document.querySelectorAll('[data-icon]').forEach((element) => {
   element.innerHTML = icons[element.getAttribute('data-icon')]
+})
+
+audio.addEventListener('play', () => {
+  document.querySelector('.is-paused .play-button').click()
+})
+
+audio.addEventListener('pause', () => {
+  document.querySelector('.is-playing .play-button').click()
 })
 
 // Determine which song to play next

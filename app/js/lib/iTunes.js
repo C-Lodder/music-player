@@ -133,7 +133,7 @@ class iTunes {
     if (id !== null && id !== undefined) {
       const playlists = await this.data.playlists
       try {
-		return playlists.find(key => key.playlist_id == id)
+		    return playlists.find(key => key.playlist_id == id)
       } catch(error) {
         throw new Error('No playlist found for the specified id!')
       }

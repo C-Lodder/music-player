@@ -1,0 +1,12 @@
+@import 'variables.css';
+
+@import 'components/global.css';
+@import 'components/dropdown.css';
+@import 'components/error.css';
+@import 'components/form.css';
+@import 'components/header.css';
+@import 'components/loader.css';
+@import 'components/player.css';
+@import 'components/playlists.css';
+@import 'components/scrollbar.css';
+@import 'components/table.css';

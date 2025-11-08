@@ -1,7 +1,8 @@
 # Changelog
 
 ## WIP
-- Update Electron to 24.0.0
+- Update Electron to 38.3.0
+- Minor code improvements
 
 ## 1.0.8
 - Update Electron to 21.3.0

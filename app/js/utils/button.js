@@ -22,12 +22,12 @@ const repeatState = {
 const button = {
   play: (track) => {
     const audio = document.getElementById('audio')
-    const button = document.createElement('a')
-    button.setAttribute('href', '#')
-    button.setAttribute('data-location', track.location)
-    button.classList.add('play-button')
-    button.innerHTML = icons.play
-    button.addEventListener('click', ({ currentTarget }) => {
+    const playBtn = document.createElement('a')
+    playBtn.setAttribute('href', '#')
+    playBtn.setAttribute('data-location', track.location)
+    playBtn.classList.add('play-button')
+    playBtn.innerHTML = icons.play
+    playBtn.addEventListener('click', ({ currentTarget }) => {
       const row = currentTarget.closest('.row')
 
       if (row !== null && row.classList.contains('is-playing')) {
@@ -70,12 +70,12 @@ const button = {
       }
     })
 
-    return button
+    return playBtn
   },
   repeat: () => {
-    const button = document.getElementById('repeat')
+    const repeatBtn = document.getElementById('repeat')
     const audio = document.getElementById('audio')
-    button.addEventListener('click', ({ currentTarget }) => {
+    repeatBtn.addEventListener('click', ({ currentTarget }) => {
       // Alternate between the button action
       if (repeatState.all) {
         repeatState.all = false
@@ -95,17 +95,17 @@ const button = {
       }
     })
 
-    return button
+    return repeatBtn
   },
   queue: () => {
-    const button = document.getElementById('queue')
-    button.setAttribute('type', 'button')
-    button.innerHTML = icons.repeat
-    button.addEventListener('click', ({ currentTarget }) => {
-      //currentTarget.nextElementSibling.classList.toggle('show')
+    const queueBtn = document.getElementById('queue')
+    queueBtn.setAttribute('type', 'button')
+    queueBtn.innerHTML = icons.repeat
+    queueBtn.addEventListener('click', ({ currentTarget }) => {
+      // currentTarget.nextElementSibling.classList.toggle('show')
     })
 
-    return button
+    return queueBtn
   },
   getRepeatState: () => {
     // Return the object key that's "true"
