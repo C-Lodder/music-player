@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "electron": "^38.6.0",
-    "electron-builder": "^26.7.0",
+    "electron-builder": "^26.8.1",
     "esbuild": "^0.27.3",
     "lightningcss": "^1.32.0"
   },
