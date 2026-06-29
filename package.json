@@ -18,7 +18,7 @@
     "@plist/parse": "^1.1.0"
   },
   "devDependencies": {
-    "electron": "^38.6.0",
+    "electron": "^42.5.1",
     "electron-builder": "^26.15.3",
     "esbuild": "^0.28.1",
     "lightningcss": "^1.32.0"
