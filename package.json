@@ -21,7 +21,7 @@
     "electron": "^43.1.0",
     "electron-builder": "^26.15.3",
     "esbuild": "^0.28.1",
-    "lightningcss": "^1.32.0"
+    "lightningcss": "^1.33.0"
   },
   "build": {
     "appId": "music-player",
