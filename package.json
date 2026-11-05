@@ -14,7 +14,7 @@
     "build:linux": "electron-builder -l --publish=never"
   },
   "dependencies": {
-    "electron-store": "^8.2.0",
+    "electron-store": "^12.0.0",
     "@plist/parse": "^1.1.0"
   },
   "devDependencies": {
